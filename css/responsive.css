@@ -1,0 +1,40 @@
+/*スマホ向けレイアウト*/
+@media all and (max-width: 670px){
+
+
+.about-txt h2{
+	font-size: 18px;
+}
+
+
+.about-txt p{
+	font-size: 13px;
+}
+
+.about-logo{
+    width: 68px;
+    height: 15px;
+}
+
+
+
+
+.news-middle ul li {
+	width: 50%;
+}
+
+.footer-logo{
+    width: 88px;
+    height: 17px;
+}
+
+footer p{
+    font-size: 11px;
+}
+
+.footer-li{
+	display: none;
+}
+
+
+}
