@@ -1,0 +1,361 @@
+body,
+html {
+  width: 100%;
+  height: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: Lato, Hiragino Kaku Gothic ProN, 'ヒラギノ角ゴ ProN W3', Meiryo, "メイリオ", Hiragino Kaku Gothic ProN, 'ヒラギノ角ゴ ProN W3', sans-serif;
+  letter-spacing: .075em;
+}
+
+/*-------------------- header --------------------*/
+
+header {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+header ul {
+  margin-top: 50px;
+  padding-right: 40px;
+}
+
+header ul li {
+  margin-left: 20px;
+}
+
+header ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+header ul li a:hover {
+  color: #f1f1f1;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+
+/*-------------------- footer --------------------*/
+
+footer {
+  color: #fff;
+  padding: 100px 0;
+}
+
+footer ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+footer ul li a:hover {
+  color: #fff;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.footer-logo {
+  width: 118px;
+  height: 25px;
+}
+
+footer p {
+  font-size: 15px;
+}
+
+.footer-left {
+  position: relative;
+}
+
+.footer-left div {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.footer-right {
+  position: relative;
+}
+
+.footer-right ul {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 15px;
+}
+
+
+/*-------------------- all --------------------*/
+
+.all-wrapper {
+  background-color: #d3032b;
+  background-image: url("https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_red.png");
+  background-size: 50% auto;
+  background-attachment: fixed;
+}
+
+
+/*-------------------- top --------------------*/
+
+.top-wrapper {
+  background-image: url("https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_mainvisual.jpg");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 800px
+}
+
+
+/*-------------------- ①feature --------------------*/
+
+.feature-wrapper {
+  background-color: #fff;
+}
+
+.feature-left-side {
+  color: #e4002b;
+  text-align: center;
+}
+
+.feature-img img {
+  position: relative;
+  top: 10px;
+  left: 0;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.swiper-container a {
+  color: black;
+}
+
+.swiper-slide a {
+  text-decoration: none;
+  color: #575757;
+}
+
+.swiper-slide a:hover {
+  transition: all 0.6s ease;
+  color: #e4002b;
+  text-decoration: none;
+}
+
+.button {
+  position: relative;
+  color: #fff;
+  transition: 0.2s;
+  background-color: #e4002b;
+  box-shadow: 5px 0 10px #c6001c;
+}
+
+.button:hover {
+  color: #fff;
+}
+
+.button::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  content: 'NEWS\ALIST';
+  white-space: pre;
+  background-color: #c6001c;
+  transform-origin: left top;
+  transform: scale(0, 1);
+  transition: transform 0.2s;
+}
+
+.button:hover::before {
+  transform-origin: right top;
+  transform: scale(1, 1);
+}
+
+
+/*-------------------- ②about --------------------*/
+
+.about-wrapper-top {
+  background-color: #f1f1f1;
+}
+
+.about-wrapper-top img {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+}
+
+.about-left-side {
+  color: #959595;
+  text-align: center;
+}
+
+.img-wrap img {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.img-animation {
+  animation: img-opacity 2s cubic-bezier(.4, 0, .2, 1);
+  overflow: hidden;
+  position: relative;
+  top: 70px;
+  left: 0;
+}
+
+.img-animation:before {
+  animation: img-animation 1s cubic-bezier(.4, 0, .2, 1) forwards;
+  background: #f1f1f1;
+  bottom: 0;
+  content: '';
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+@keyframes img-opacity {
+  0% {
+    opacity: 0;
+  }
+}
+
+@keyframes img-animation {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.about-message {
+  color: #fff;
+  padding-top: 100px;
+  line-height: 2em
+}
+
+.about-logo {
+  width: 76px;
+  height: 16px;
+}
+
+
+/*-------------------- ③product --------------------*/
+
+.product-wrapper {
+  background-image: url("https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_top-product.jpg");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 800px
+}
+
+.product-left-side {
+  color: #fff;
+  text-align: center;
+}
+
+
+/*-------------------- ④shop --------------------*/
+
+.shop-wrapper-top {
+  background-color: #f1f1f1;
+}
+
+.shop-left-side {
+  color: #959595;
+  text-align: center;
+}
+
+
+/*
+.shop-wrapper-bottom {
+    background-color: #c6001c;
+    background-image: url("https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_red.png");
+    background-size: 50% auto;
+}
+*/
+
+.shop-title {
+  font-size: 30px;
+  color: #fff;
+}
+
+
+/*-------------------- ⑤news --------------------*/
+
+.news-wrapper {
+  background-color: #fff;
+}
+
+.news-title {
+  font-size: 30px;
+  padding: 40px 0;
+  margin-bottom: 0
+}
+
+.news-middle ul {
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.news-middle ul li {
+  width: 25%;
+  list-style: none;
+  padding: 0 15px;
+  margin-bottom: 50px;
+}
+
+.news-middle ul li a {
+  text-decoration: none;
+  color: #575757;
+}
+
+.news-imgTopLine {
+  padding-top: 2px;
+  background-color: #d3032b;
+}
+
+.news-img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 5%;
+}
+
+.news-middle ul li a:hover {
+  display: block;
+  transition: all 0.6s ease;
+  color: #e4002b;
+}
+
+.news-wrapper ul {
+  margin-bottom: 0;
+}
+
+
+/*-------------------- common　--------------------*/
+
+.vertical-writing {
+  writing-mode: vertical-rl;
+  letter-spacing: 10px;
+  text-align: center;
+  transform: rotate(180deg);
+}
+
+.create-margin {
+  padding: 50px 0;
+}
+
+.date {
+  color: #959595;
+}
