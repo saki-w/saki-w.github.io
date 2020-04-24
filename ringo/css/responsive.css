@@ -2,6 +2,11 @@
 
 @media all and (max-width: 670px) {
 
+  .all-wrapper {
+
+    background-size: 100% auto;
+  }
+
 
 
 
