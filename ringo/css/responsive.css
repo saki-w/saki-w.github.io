@@ -2,6 +2,14 @@
 
 @media all and (max-width: 670px) {
 
+body {
+  min-width: 670px;
+}
+
+
+
+  
+
   .header-logo,
   .sp-title,
   .shop-sp,
