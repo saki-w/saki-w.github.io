@@ -90,8 +90,8 @@
     max-width: 90%;
     height: 100%;
     transition: all 0.3s ease-in-out 0s;
-    /*transform: translateX(-100%);*/
-    transform: translateX(150%);
+    transform: translateX(-100%);
+    /*transform: translateX(150%);*/
     background-color: #d3032b;
     background-image: url("https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_red.png");
     background-size: auto 150%;
@@ -100,8 +100,8 @@
     padding: 30px 20px;
   }
   #drawer-checkbox:checked~#drawer-content {
-    /*transform: translateX(0);*/
-    transform: translateX(50%);
+    transform: translateX(0);
+    /*transform: translateX(50%);*/
     box-shadow: 6px 0 25px rgba(0, 0, 0, 0.16);
   }
 
