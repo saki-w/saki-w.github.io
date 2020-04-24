@@ -1,6 +1,14 @@
 /*-------------------- SP向け ----------------------------------------*/
 
 @media all and (max-width: 670px) {
+
+  .header-logo,
+  .sp-title,
+  .shop-sp,
+  .shop-middle,
+  .sp-menu {
+    display: block;
+  }
   
 
 
@@ -325,7 +333,7 @@ font-weight: 600;
 
 /*-------------------- PC・タブレット向け ----------------------------------------*/
 
-/*@media only screen and (min-width: 670px) {*/
+/*@media only screen and (min-width: 670px) {
 
 @media all and (min-width: 670px) {
 ul li {
@@ -339,3 +347,4 @@ ul li {
     display: none;
   }
 }
+*/

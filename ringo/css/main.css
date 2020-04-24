@@ -1,3 +1,21 @@
+.header-logo,
+  .sp-title,
+  .shop-sp,
+  .shop-middle,
+  .sp-menu {
+    display: none;
+  }
+
+  ul li {
+  display: inline;
+}
+
+
+
+
+
+
+
 body,
 html {
   width: 100%;
