@@ -3,7 +3,7 @@
 @media all and (max-width: 670px) {
 
 
-  
+
 
 
 
@@ -52,7 +52,7 @@
   #drawer-icon span::before,
   #drawer-icon span::after {
     -webkit-transform: rotate(0);
-    background: #fff;
+    background: #fff;block
     border-radius: 4px;
     content: "";
     display: block;
@@ -292,6 +292,23 @@ font-weight: 600;
     left: 0;
     width: 100%;
   }
+
+
+
+  .shop-middle{
+    background-image: url("https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_next_shop.jpg");
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 200px
+  }
+
+
+
+
+
+
+
   /*-------------------- ⑤news --------------------*/
   .news-title {
     font-size: 16px;
