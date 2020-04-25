@@ -23,15 +23,10 @@
 
 
     function slider() {
-      if ($(window).width() > 670) { // 画面のサイズが700pxより大きかったらPC用の設定に
-        $('.slider').bxSlider({
-          pause: 1000
-        });
-      } else { // そうでない場合（700pxより小さい場合）はスマホ用の設定に
-        $('.slider').bxSlider({
-          pause: 6000
-        });
-      }
+      $('.slider').bxSlider({
+    pause: 5000,
+
+    });
     }
 
     function ani() {
