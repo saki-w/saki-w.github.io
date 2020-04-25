@@ -25,29 +25,11 @@
     function slider() {
       if ($(window).width() > 670) { // 画面のサイズが700pxより大きかったらPC用の設定に
         $('.slider').bxSlider({
-          auto: true,
-          pause: 6000,
-          speed: 1500,
-          easing: 'easeOutBounce',
-          minSlides: 1,
-          maxSlides: 3,
-          slideWidth: 340,
-          moveSlides: 1,
-          pager: false,
-          responsive: true
+          pause: 1000
         });
       } else { // そうでない場合（700pxより小さい場合）はスマホ用の設定に
         $('.slider').bxSlider({
-          auto: true,
-          pause: 1000,
-          speed: 1500,
-          easing: 'easeOutBounce',
-          minSlides: 1,
-          maxSlides: 1,
-          slideWidth: 0,
-          moveSlides: 1,
-          pager: false,
-          responsive: true
+          pause: 6000
         });
       }
     }
@@ -267,6 +249,9 @@
               <div class="sp-title">
                 <span style="color: #e4002b;">FEATURE</span>
               </div>
+
+<ipc>
+
               <div class="slider">
                 <div class="swiper-slide">
                   <a href="#">
@@ -308,6 +293,13 @@
                   </a>
                 </div>
               </div>
+            </ipc>
+
+
+
+
+
+
             </div>
             <div class="col-1 button">NEWS<br>LIST</div>
           </div>
