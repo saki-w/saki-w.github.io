@@ -17,6 +17,8 @@ html {
   -webkit-font-smoothing: antialiased;
   font-family: Lato, Hiragino Kaku Gothic ProN, 'ヒラギノ角ゴ ProN W3', Meiryo, "メイリオ", Hiragino Kaku Gothic ProN, 'ヒラギノ角ゴ ProN W3', sans-serif;
   letter-spacing: .075em;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
 }
 
 
@@ -126,11 +128,14 @@ footer p {
 
 .feature-wrapper {
   background-color: #fff;
+  padding: 60px 0;
 }
 
 .feature-left-side {
   color: #e4002b;
   text-align: center;
+
+    font-size: 16px;
 }
 
 .feature-img img {
@@ -148,7 +153,8 @@ footer p {
 
 .swiper-slide a {
   text-decoration: none;
-  color: #575757;
+  width: 100%;
+    
 }
 
 .swiper-slide a:hover {
@@ -156,6 +162,23 @@ footer p {
   color: #e4002b;
   text-decoration: none;
 }
+
+.swiper-slide h3{
+  margin-bottom: 0;
+    color: #545454;
+    font-size: 15px;
+    font-weight: 700;
+    font-feature-settings: 'palt';
+}
+
+.swiper-slide span{
+  margin-top: 30px;
+    font-size: 12px;
+    color: #999;
+    font-weight: 600;
+}
+
+
 
 .button {
   position: relative;
@@ -194,18 +217,21 @@ footer p {
 
 .about-wrapper-top {
   background-color: #f1f1f1;
+  padding-top: 60px;
+  height: 640px;
 }
 
-.about-wrapper-top img {
-  width: 100%;
-  height: 600px;
-  object-fit: cover;
+.about-wrapper-bottom{
+  padding-top: 120px;
+  margin-top: -40px;
 }
 
 .about-left-side {
   color: #959595;
   text-align: center;
+  font-size: 16px;
 }
+
 
 .img-wrap img {
   position: relative;
@@ -216,11 +242,22 @@ footer p {
   object-fit: cover;
 }
 
+
+
+
+
+
+
+
+
+
+
+
 .img-animation {
   animation: img-opacity 2s cubic-bezier(.4, 0, .2, 1);
   overflow: hidden;
   position: relative;
-  top: 70px;
+  top: 0;
   left: 0;
 }
 
@@ -251,14 +288,35 @@ footer p {
 
 .about-message {
   color: #fff;
-  padding-top: 100px;
-  line-height: 2em
+  padding: 60px 50px;
+
+  
 }
+
+.about-message h2{
+  font-size: 30px;
+    letter-spacing: .1em;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-feature-settings: 'palt';
+    -webkit-font-smoothing: antialiased;
+}
+
+
+
+.about-message p{
+  margin-bottom: 1em;
+  font-size: 15px;
+  font-feature-settings: 'palt';
+  font-weight: 700;
+}
+
 
 .about-logo {
   width: 76px;
   height: 16px;
 }
+
 
 
 /*-------------------- ③product --------------------*/
@@ -274,6 +332,7 @@ footer p {
 .product-left-side {
   color: #fff;
   text-align: center;
+  font-size: 16px;
 }
 
 
@@ -281,25 +340,36 @@ footer p {
 
 .shop-wrapper-top {
   background-color: #f1f1f1;
+  height: 410px;
+  padding-top: 60px;
 }
 
 .shop-left-side {
   color: #959595;
   text-align: center;
+  font-size: 16px;
 }
 
 
-/*
 .shop-wrapper-bottom {
-    background-color: #c6001c;
-    background-image: url("https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_red.png");
-    background-size: 50% auto;
+  margin-top: -70px;
+    padding-top: 110px;
 }
-*/
 
 .shop-title {
-  font-size: 30px;
   color: #fff;
+
+
+  font-size: 30px;
+    letter-spacing: .1em;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-feature-settings: 'palt';
+}
+
+.shop{
+padding-top: 60px;
+    padding-bottom: 75px;
 }
 
 
@@ -310,9 +380,16 @@ footer p {
 }
 
 .news-title {
-  font-size: 30px;
   padding: 40px 0;
-  margin-bottom: 0
+  margin-bottom: 0;
+
+
+
+  font-size: 30px;
+    letter-spacing: .1em;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-feature-settings: 'palt';
 }
 
 .news-middle ul {
@@ -322,11 +399,19 @@ footer p {
   width: 100%;
 }
 
+.news-middle h4{
+  margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
 .news-middle ul li {
   width: 25%;
   list-style: none;
-  padding: 0 15px;
-  margin-bottom: 50px;
+
+  margin-bottom: 70px;
+    padding: 0 2%;
 }
 
 .news-middle ul li a {
@@ -342,7 +427,7 @@ footer p {
 .news-img {
   width: 100%;
   height: auto;
-  margin-bottom: 5%;
+  margin-bottom: 15px;
 }
 
 .news-middle ul li a:hover {
@@ -370,5 +455,7 @@ footer p {
 }
 
 .date {
-  color: #959595;
+  color: #999;
+    font-size: 12px;
+    font-weight: 600;
 }

@@ -141,8 +141,7 @@
   }
   /*-------------------- common　--------------------*/
   .col-1,
-  .header-pc,
-  .about-img-wrap {
+  .header-pc {
     display: none;
   }
   .sp-title {
@@ -211,6 +210,17 @@
     width: 68px;
     height: 15px;
   }
+  .about-wrapper-top{
+    height: 0;
+    padding: 0;
+  }
+  .about-img-wrap{
+    display: none;
+  }
+  .about-wrapper-bottom{
+    margin-top: 0;
+    padding-top: 0;
+  }
   /*-------------------- ③product --------------------*/
   .product-wrapper {
     background-size: auto 100%;
@@ -260,6 +270,12 @@
     background-repeat: no-repeat;
     background-position: center;
     height: 200px
+  }
+  .shop-wrapper-top{
+    padding-top: 0;
+  }
+  .shop-wrapper-top{
+    height: 275px;
   }
   /*-------------------- ⑤news --------------------*/
   .news-title {
