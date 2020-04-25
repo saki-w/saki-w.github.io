@@ -1,20 +1,14 @@
 .header-logo,
-  .sp-title,
-  .shop-sp,
-  .shop-middle,
-  .sp-menu {
-    display: none;
-  }
-
-  ul li {
-  display: inline;
+.sp-title,
+.shop-sp,
+.shop-middle,
+.sp-menu {
+  display: none;
 }
 
-
-
-
-
-
+ul li {
+  display: inline;
+}
 
 body,
 html {
@@ -24,6 +18,7 @@ html {
   font-family: Lato, Hiragino Kaku Gothic ProN, 'ヒラギノ角ゴ ProN W3', Meiryo, "メイリオ", Hiragino Kaku Gothic ProN, 'ヒラギノ角ゴ ProN W3', sans-serif;
   letter-spacing: .075em;
 }
+
 
 /*-------------------- header --------------------*/
 

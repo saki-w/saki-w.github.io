@@ -1,18 +1,9 @@
 /*-------------------- SP向け ----------------------------------------*/
 
 @media all and (max-width: 670px) {
-
   .all-wrapper {
-
     background-size: 100% auto;
   }
-
-
-
-
-
-
-
   .header-logo,
   .sp-title,
   .shop-sp,
@@ -20,10 +11,6 @@
   .sp-menu {
     display: block;
   }
-  
-
-
-
   /*ドロワーメニュー*/
   #drawer-checkbox {
     display: none;
@@ -34,13 +21,9 @@
     width: 50px;
     height: 50px;
     /*position: absolute;*/
-    position: absolute;
-
-
-
+    position: fixed;
     top: 20px;
     right: 35px;
-
   }
   #drawer-icon span {
     background: #fff;
@@ -57,7 +40,7 @@
   #drawer-icon span::before,
   #drawer-icon span::after {
     -webkit-transform: rotate(0);
-    background: #fff;block
+    background: #fff;
     border-radius: 4px;
     content: "";
     display: block;
@@ -108,37 +91,22 @@
     max-width: 90%;
     height: 100%;
     transition: all 0.3s ease-in-out 0s;
-    transform: translateX(-100%);
-    /*transform: translateX(150%);*/
+    /*transform: translateX(-100%);*/
+    transform: translateX(150%);
     background-color: #d3032b;
     background-image: url("https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_red.png");
     background-size: auto 150%;
     background-position: center;
-
     padding: 30px 20px;
   }
   #drawer-checkbox:checked~#drawer-content {
-    transform: translateX(0);
-    /*transform: translateX(50%);*/
+    /*transform: translateX(0);*/
+    transform: translateX(50%);
     box-shadow: 6px 0 25px rgba(0, 0, 0, 0.16);
   }
-
-
-
-
-
   #drawer-checkbox:checked~#drawer-icon {
     z-index: 100;
   }
-
-
-
-
-
-
-
-
-
   #drawer-close {
     display: none;
     position: fixed;
@@ -155,33 +123,22 @@
     display: block;
     opacity: 0.5;
   }
-
-
-
-
-
-#drawer-content ul{
-  list-style: none;
-  font-size: 20px;
-  padding: 0;
-}
-
-#drawer-content li{
-  margin-left: 15px;
-  margin-bottom: 5px;
-}
-
-
-#drawer-content a{
-letter-spacing: .15em;
-color: #fff;
-line-height: 1.8;
-font-weight: 600;
-}
-
-
-
-
+  #drawer-content ul {
+    list-style: none;
+    font-size: 20px;
+    padding: 0;
+  }
+  #drawer-content li {
+    display: block;
+    margin-left: 15px;
+    margin-bottom: 5px;
+  }
+  #drawer-content a {
+    letter-spacing: .15em;
+    color: #fff;
+    line-height: 1.8;
+    font-weight: 600;
+  }
   /*-------------------- common　--------------------*/
   .col-1,
   .header-pc,
@@ -297,23 +254,13 @@ font-weight: 600;
     left: 0;
     width: 100%;
   }
-
-
-
-  .shop-middle{
+  .shop-middle {
     background-image: url("https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_next_shop.jpg");
-  background-size: auto 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 200px
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 200px
   }
-
-
-
-
-
-
-
   /*-------------------- ⑤news --------------------*/
   .news-title {
     font-size: 16px;
@@ -338,13 +285,9 @@ font-weight: 600;
   footer {
     padding: 60px 0;
   }
-
-  footer ul li{
+  footer ul li {
     display: inline;
   }
-
-
-
   .footer-logo {
     width: 88px;
     height: 17px;
@@ -359,6 +302,7 @@ font-weight: 600;
 
 
 /*-------------------- PC・タブレット向け ----------------------------------------*/
+
 
 /*@media only screen and (min-width: 670px) {
 
