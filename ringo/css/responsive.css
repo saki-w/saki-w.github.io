@@ -5,10 +5,10 @@
     background-size: 100% auto;
   }
   .header-logo,
-  .sp-title,
+  .sp-ttl,
   .shop-sp,
   .shop-middle,
-  .sp-menu {
+  .sp-header {
     display: block;
   }
   /*ドロワーメニュー*/
@@ -141,13 +141,13 @@
   }
   /*-------------------- common　--------------------*/
   .col-1,
-  .header-pc {
+  .pc-header {
     display: none;
   }
-  .sp-title {
+  .sp-ttl {
     margin-bottom: 20px;
   }
-  .sp-title span {
+  .sp-ttl span {
     font-size: 16px;
     font-weight: 400;
     letter-spacing: .2em;
@@ -238,7 +238,6 @@
   }
   .shop-top {
     background-color: #f1f1f1;
-    height: 75px;
   }
   .img-wrap {
     height: 200px;
@@ -269,7 +268,8 @@
     background-size: auto 100%;
     background-repeat: no-repeat;
     background-position: center;
-    height: 200px
+
+    padding-top: 75px;
   }
   .shop-wrapper-top{
     padding-top: 0;
@@ -315,23 +315,3 @@
     display: none;
   }
 }
-
-
-/*-------------------- PC・タブレット向け ----------------------------------------*/
-
-
-/*@media only screen and (min-width: 670px) {
-
-@media all and (min-width: 670px) {
-ul li {
-  display: inline;
-}
-
-  .header-logo,
-  .sp-title,
-  .shop-sp,
-  .shop-middle {
-    display: none;
-  }
-}
-*/
