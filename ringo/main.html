@@ -13,12 +13,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
   <!--bxslider-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+  <link href="css/jquery.bxslider.css" rel="stylesheet">
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
   <!--
-  <link href="css/jquery.bxslider.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 -->
 
 
@@ -285,17 +286,24 @@
 
           <!-- shop-wrapper -->
           <div class="shop-wrapper">
+            <!--SP向け-->
+            <div class="row shop-top">
+              <div class="col-12">
+                <div class="sp-ttl">
+                  <span style="color: #959595;">SHOP</span>
+                </div>
+              </div>
+            </div>
+
+
+
+
             <div class="shop-wrapper-top row">
               <div class="col-1 shop-left-side">
                 <span class="vertical-writing">SHOP</span>
               </div>
 
-              <!--SP向け-->
-              <div class="col-12 shop-top">
-                <div class="sp-ttl">
-                  <span style="color: #959595;">SHOP</span>
-                </div>
-              </div>
+              
 
 
               <!--
@@ -305,7 +313,7 @@
 
 
               <!--PC向け-->
-              <div class="col-11 shop-pc" style="padding-left: 0; padding-right: 0;">
+              <div class="col-md-11 col-sm-11 col-xs-12 shop-pc" style="padding-left: 0; padding-right: 0;">
                 <div class="img-wrap">
                   <img src="https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_next_shop.jpg">
                 </div>

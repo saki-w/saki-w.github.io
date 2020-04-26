@@ -327,12 +327,14 @@ footer p {
   background-repeat: no-repeat;
   background-position: center;
   height: 800px
+
 }
 
 .product-left-side {
   color: #fff;
   text-align: center;
   font-size: 16px;
+  padding-top: 60px;
 }
 
 

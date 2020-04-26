@@ -233,9 +233,10 @@
   .shop {
     padding: 40px 0;
   }
-  
+
   .shop-top {
     background-color: #f1f1f1;
+    padding-top: 40px;
   }
   .img-wrap {
     height: 200px;
@@ -270,10 +271,13 @@
     padding-top: 75px;
   }
   .shop-wrapper-top{
-    padding-top: 0;
+    height: 200px;
+    padding: 0;
   }
-  .shop-wrapper-top{
-    height: 275px;
+  .shop-wrapper-bottom{
+    padding: 0;
+    margin-top: 0;
+
   }
   /*-------------------- ⑤news --------------------*/
   .news-title {
