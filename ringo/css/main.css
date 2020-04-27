@@ -12,6 +12,7 @@ ul li {
 
 body,
 html {
+  margin: 0;
   width: 100%;
   height: auto;
   -webkit-font-smoothing: antialiased;
@@ -117,7 +118,7 @@ footer p {
 
 .top-wrapper {
   background-image: url("https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_mainvisual.jpg");
-  background-size: 100% auto;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   height: 800px
@@ -323,7 +324,7 @@ footer p {
 
 .product-wrapper {
   background-image: url("https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_top-product.jpg");
-  background-size: 100% auto;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   height: 800px
