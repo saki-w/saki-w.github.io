@@ -6,6 +6,13 @@
   display: none;
 }
 
+.container-fluid {
+  max-width: 1680px;
+  width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
 ul li {
   display: inline;
 }
@@ -120,7 +127,7 @@ footer p {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 800px
+  padding: 400px 0;
 }
 
 
