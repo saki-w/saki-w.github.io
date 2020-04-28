@@ -31,6 +31,19 @@ html {
 
 /*-------------------- header --------------------*/
 
+header{
+  width: 100%;
+    min-width: 960px;
+    max-width: 1680px;
+    padding: 20px 0;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 110;
+}
+
 header a {
   font-size: 16px;
   font-weight: 600;
@@ -38,7 +51,6 @@ header a {
 }
 
 header ul {
-  margin-top: 50px;
   padding-right: 40px;
 }
 
@@ -136,6 +148,23 @@ footer p {
 
 /*-------------------- ①feature --------------------*/
 
+.table{
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.table-cell{
+  display: table-cell;
+    vertical-align: bottom;
+    padding-bottom: 70px;
+}
+
+.table .date{
+  display: block;
+  margin-top: 40px;
+}
+
 .feature-wrapper {
   background-color: #fff;
   padding: 60px 0;
@@ -180,7 +209,6 @@ footer p {
 }
 
 .swiper-slide span {
-  margin-top: 30px;
   font-size: 12px;
   color: #999;
   font-weight: 600;
@@ -433,11 +461,6 @@ footer p {
   text-align: center;
   transform: rotate(180deg);
 }
-
-.create-margin {
-  padding: 50px 0;
-}
-
 .date {
   color: #999;
   font-size: 12px;

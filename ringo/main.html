@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +15,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
   <!--bxslider-->
   <link href="css/jquery.bxslider.css" rel="stylesheet">
-  
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
@@ -24,17 +25,13 @@
 
 
   <script type="text/javascript">
-
-
-
-
-    jQuery(document).ready(function($){
+    jQuery(document).ready(function($) {
       $('.slider').bxSlider();
     });
 
 
 
-    jQuery(document).ready(function($){
+    jQuery(document).ready(function($) {
       const image = document.querySelectorAll('.img-wrap');
 
       const observer = new IntersectionObserver(function(entries) {
@@ -51,37 +48,80 @@
         observer.observe(img);
       });
     });
-
-
-
-
-
-
-
-
   </script>
 </head>
 
 <body>
   <div class="all-wrapper">
     <div class="container-fluid">
-      
 
-          <!--PC向けメニュー-->
 
-          
-          <!--SP向けメニュー-->
-          <div class="sp-header">
-            <input id="drawer-checkbox" type="checkbox">
-            <label id="drawer-icon" for="drawer-checkbox"><span></span></label>
-            <label id="drawer-close" for="drawer-checkbox"></label>
-            <div id="drawer-content">
+      <!--PC向けメニュー-->
+
+
+      <!--SP向けメニュー-->
+      <div class="sp-header">
+        <input id="drawer-checkbox" type="checkbox">
+        <label id="drawer-icon" for="drawer-checkbox"><span></span></label>
+        <label id="drawer-close" for="drawer-checkbox"></label>
+        <div id="drawer-content">
+          <ul>
+            <li>
+              <a href="#"><img style="width: 95px; height: 23px; margin-bottom: 20px;" src="https://ringo-applepie.com/wp-content/themes/ringo/assets/img/footer_logo.png"></a>
+            </li>
+            <li>
+              <a href="#">TOP</a>
+            </li>
+            <li>
+              <a href="#">ABOUT</a>
+            </li>
+            <li>
+              <a href="#">PRODUCT</a>
+            </li>
+            <li>
+              <a href="#">SHOP</a>
+            </li>
+            <li>
+              <a href="#">NEWS</a>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <a href="#" style="font-size: 16px; margin-bottom: 10px;">RECRUIT</a>
+            </li>
+            <li style="margin-bottom: 30px;">
+              <a href="#" style="font-size: 16px; margin-bottom: 10px;">CONTACT</a>
+            </li>
+            <li style="display: inline;">
+              <a href="https://ja-jp.facebook.com/" class="social-icon fab fa-facebook-f"></a>
+            </li>
+            <li style="display: inline;">
+              <a href="https://ja-jp.facebook.com/" class="social-icon fab fa-twitter"></a>
+            </li>
+            <li style="display: inline;">
+              <a href="https://twitter.com//" class="social-icon fab fa-instagram"></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!--top-wrapper-->
+      <div class="top-wrapper row" style="position: relative;">
+        <div class="header-logo">
+          <a href="#">
+            <img style="width: 118px; height: 25px;" src="https://ringo-applepie.com/wp-content/themes/ringo/assets/img/footer_logo.png">
+          </a>
+        </div>
+        <header class="pc-header">
+          <div class="row">
+
+
+            <div class="col-7">
               <ul>
-                <li>
-                  <a href="#"><img style="width: 95px; height: 23px; margin-bottom: 20px;" src="https://ringo-applepie.com/wp-content/themes/ringo/assets/img/footer_logo.png"></a>
+                <li style="margin-left: 0;">
+                  <a href="https://saki-w.github.io/ringo/main.html"><img style="width: 118px; height: 25px;" src="https://ringo-applepie.com/wp-content/themes/ringo/assets/img/footer_logo.png"></a>
                 </li>
                 <li>
-                  <a href="#">TOP</a>
+                  <a href="https://saki-w.github.io/ringo/main.html">TOP</a>
                 </li>
                 <li>
                   <a href="#">ABOUT</a>
@@ -96,188 +136,125 @@
                   <a href="#">NEWS</a>
                 </li>
               </ul>
-              <ul>
-                <li>
-                  <a href="#" style="font-size: 16px; margin-bottom: 10px;">RECRUIT</a>
-                </li>
-                <li style="margin-bottom: 30px;">
-                  <a href="#" style="font-size: 16px; margin-bottom: 10px;">CONTACT</a>
-                </li>
-                <li style="display: inline;">
-                  <a href="https://ja-jp.facebook.com/" class="social-icon fab fa-facebook-f"></a>
-                </li>
-                <li style="display: inline;">
-                  <a href="https://ja-jp.facebook.com/" class="social-icon fab fa-twitter"></a>
-                </li>
-                <li style="display: inline;">
-                  <a href="https://twitter.com//" class="social-icon fab fa-instagram"></a>
-                </li>
-              </ul>
             </div>
-          </div>
-          <!--top-wrapper-->
-          <div class="top-wrapper row" style="position: relative;">
-            <div class="header-logo">
-            <a href="#">
-              <img style="width: 118px; height: 25px;" src="https://ringo-applepie.com/wp-content/themes/ringo/assets/img/footer_logo.png">
-            </a>
-          </div>
-          <header class="pc-header" style="position: absolute; top: 0; width: 100%;">
-            <div class="row">
-              
-
-            <div class="col-7">
+            <div class="col-5">
+              <div style="text-align: right;">
                 <ul>
-                    <li>
-                      <a href="https://saki-w.github.io/ringo/main.html"><img style="width: 118px; height: 25px;" src="https://ringo-applepie.com/wp-content/themes/ringo/assets/img/footer_logo.png"></a>
-                    </li>
-                    <li>
-                      <a href="https://saki-w.github.io/ringo/main.html">TOP</a>
-                    </li>
-                    <li>
-                      <a href="#">ABOUT</a>
-                    </li>
-                    <li>
-                      <a href="#">PRODUCT</a>
-                    </li>
-                    <li>
-                      <a href="#">SHOP</a>
-                    </li>
-                    <li>
-                      <a href="#">NEWS</a>
-                    </li>
-                  </ul>
-              </div>
-              <div class="col-5">
-                <div style="text-align: right;">
-                  <ul>
-                    <li>
-                      <a href="#">RECRUIT</a>
-                    </li>
-                    <li>
-                      <a href="#">CONTACT</a>
-                    </li>
-                    <li>
-                      <a href="https://ja-jp.facebook.com/" class="social-icon fab fa-facebook-f"></a>
-                    </li>
-                    <li>
-                      <a href="https://ja-jp.facebook.com/" class="social-icon fab fa-twitter"></a>
-                    </li>
-                    <li>
-                      <a href="https://twitter.com//" class="social-icon fab fa-instagram"></a>
-                    </li>
-                  </ul>
-                </div>
+                  <li>
+                    <a href="#">RECRUIT</a>
+                  </li>
+                  <li>
+                    <a href="#">CONTACT</a>
+                  </li>
+                  <li>
+                    <a href="https://ja-jp.facebook.com/" class="social-icon fab fa-facebook-f"></a>
+                  </li>
+                  <li>
+                    <a href="https://ja-jp.facebook.com/" class="social-icon fab fa-twitter"></a>
+                  </li>
+                  <li>
+                    <a href="https://twitter.com//" class="social-icon fab fa-instagram"></a>
+                  </li>
+                </ul>
               </div>
             </div>
-
-
-          </header>
           </div>
-          <!--feature-wrapper-->
-          <div class="feature-wrapper row">
-            <div class="col-1 feature-left-side">
-              <span class="vertical-writing">FEATURE</span>
-            </div>
-            <div class="col-md-10 col-sm-10 col-xs-12" style="margin-left: -15px; margin-right: 15px;">
-              <div class="sp-ttl">
-                <span style="color: #e4002b;">FEATURE</span>
-              </div>
-              <div class="slider">
-                <div class="swiper-slide">
-                  <a href="#">
-                    <div class="row">
-                      <div class="col-md-7 col-sm-7 col-xs-12 feature-img">
-                        <img src="https://ringo-applepie.com/wp-content/uploads/2020/03/ringo_berygarden_ogp-840x473.jpg">
-                      </div>
-                      <div class="col-md-5 col-sm-5 col-xs-12 create-margin">
+
+
+        </header>
+      </div>
+      <!--feature-wrapper-->
+      <div class="feature-wrapper row">
+        <div class="col-1 feature-left-side">
+          <span class="vertical-writing">FEATURE</span>
+        </div>
+        <div class="col-md-10 col-sm-10 col-xs-12" style="margin-left: -15px; margin-right: 15px;">
+          <div class="sp-ttl">
+            <span style="color: #e4002b;">FEATURE</span>
+          </div>
+          <div class="slider">
+            <div class="swiper-slide">
+              <a href="#">
+                <div class="row">
+                  <div class="col-md-7 col-sm-7 col-xs-12 feature-img">
+                    <img src="https://ringo-applepie.com/wp-content/uploads/2020/03/ringo_berygarden_ogp-840x473.jpg">
+                  </div>
+                  <div class="col-md-5 col-sm-5 col-xs-12">
+                    <div class="table">
+                      <div class="table-cell">
                         <h3>BERRY GARDEN 第1弾は、ストロベリーを主役に、3種のレッドベリーが春を運ぶ、「焼きたてカスタードレッドベリーパイ」。3/20(金)からの期間限定販売。</h3>
                         <span class="date">2020.03.16</span>
                       </div>
                     </div>
-                  </a>
+                  </div>
                 </div>
-                <div class="swiper-slide">
-                  <a href="#">
-                    <div class="row">
-                      <div class="col-md-7 col-sm-7 col-xs-12 feature-img">
-                        <img src="https://ringo-applepie.com/wp-content/uploads/2020/01/2001_ringowhite04-750x422.jpg">
-                      </div>
-                      <div class="col-md-5 col-sm-5 col-xs-12 create-margin">
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="#">
+                <div class="row">
+                  <div class="col-md-7 col-sm-7 col-xs-12 feature-img">
+                    <img src="https://ringo-applepie.com/wp-content/uploads/2020/01/2001_ringowhite04-750x422.jpg">
+                  </div>
+                  <div class="col-md-5 col-sm-5 col-xs-12">
+                    <div class="table">
+                      <div class="table-cell">
                         <h3>「焼きたてカスタードアップルパイ・ホワイト」がホワイトデーまでの期間限定で登場</h3>
                         <span class="date">2020.02.07</span>
                       </div>
                     </div>
-                  </a>
+                  </div>
                 </div>
-                <div class="swiper-slide">
-                  <a href="#">
-                    <div class="row">
-                      <div class="col-md-7 col-sm-7 col-xs-12 feature-img">
-                        <img src="https://ringo-applepie.com/wp-content/uploads/2019/12/choco_2-840x473.jpg">
-                      </div>
-                      <div class="col-md-5 col-sm-5 col-xs-12 create-margin">
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="#">
+                <div class="row">
+                  <div class="col-md-7 col-sm-7 col-xs-12 feature-img">
+                    <img src="https://ringo-applepie.com/wp-content/uploads/2019/12/choco_2-840x473.jpg">
+                  </div>
+                  <div class="col-md-5 col-sm-5 col-xs-12">
+                    <div class="table">
+                      <div class="table-cell">
                         <h3>限定チョコフレーバーの大口注文の電話予約を全国10店舗でスタート！予約、受取方法のご案内</h3>
                         <span class="date">2020.01.27</span>
                       </div>
                     </div>
-                  </a>
+                  </div>
                 </div>
-              </div>
+              </a>
             </div>
-            <div class="col-1 button">NEWS<br>LIST</div>
           </div>
-          <!--about-wrapper-->
-          <div class="about-wrapper">
-            <div class="about-wrapper-top row">
-              <div class="col-1 about-left-side">
-                <span class="vertical-writing">ABOUT RINGO</span>
-              </div>
-              <div class="col-md-11 col-sm-11 col-xs-12 about-img-wrap" style="padding-left: 0; padding-right: 0;">
-                <div class="img-wrap">
-                  <img style="height: 640px;" src="https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_concept.jpg">
-                </div>
-              </div>
-
-            </div>
-
-
-            <div class="about-wrapper-bottom row">
-              <div class="col-1"></div>
-              <div class="col-md-9 col-sm-9 col-xs-12 about-message">
-                <div class="sp-ttl">
-                  <span>ABOUT RINGO</span>
-                </div>
-                <h2>とっておきを、みんなのものへ</h2>
-                <img class="about-logo" src="https://ringo-applepie.com/wp-content/themes/ringo/assets/img/footer_logo.png">
-                <p style="display: inline;">は「焼きたてカスタードアップルパイ」の専門店。</p>
-                <p>工房一体型をコンセプトとして、店舗で焼き上げ、いつでも出来たてのアップルパイをご提供しています。</p>
-                <p>お菓子職人が、とびっきりおいしいアップルパイを作るために日夜、工房にこもって作り続けた結果できたご褒美スイーツ。そんなご褒美スイーツを皆様におすそわけする場がRINGOです。</p>
-                <p>毎日店頭で焼き上げる、その1つ1つに思いを込め、究極の美味しさを追求します。</p>
-              </div>
-
-
-
-
-
-
-
+        </div>
+        <div class="col-1 button">NEWS<br>LIST</div>
+      </div>
+      <!--about-wrapper-->
+      <div class="about-wrapper">
+        <div class="about-wrapper-top row">
+          <div class="col-1 about-left-side">
+            <span class="vertical-writing">ABOUT RINGO</span>
+          </div>
+          <div class="col-md-11 col-sm-11 col-xs-12 about-img-wrap" style="padding-left: 0; padding-right: 0;">
+            <div class="img-wrap">
+              <img style="height: 640px;" src="https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_concept.jpg">
             </div>
           </div>
 
+        </div>
 
 
-
-
-
-          <!-- product-wrapper -->
-          <div class="product-wrapper row">
-            <div class="sp-ttl" style="padding-left: 15px; padding-top: 40px;">
-              <span style="color: #fff;">PRODUCT</span>
+        <div class="about-wrapper-bottom row">
+          <div class="col-1"></div>
+          <div class="col-md-9 col-sm-9 col-xs-12 about-message">
+            <div class="sp-ttl">
+              <span>ABOUT RINGO</span>
             </div>
-            <div class="col-1 product-left-side">
-              <span class="vertical-writing">PRODUCT</span>
-            </div>
+            <h2>とっておきを、みんなのものへ</h2>
+            <img class="about-logo" src="https://ringo-applepie.com/wp-content/themes/ringo/assets/img/footer_logo.png">
+            <p style="display: inline;">は「焼きたてカスタードアップルパイ」の専門店。</p>
+            <p>工房一体型をコンセプトとして、店舗で焼き上げ、いつでも出来たてのアップルパイをご提供しています。</p>
+            <p>お菓子職人が、とびっきりおいしいアップルパイを作るために日夜、工房にこもって作り続けた結果できたご褒美スイーツ。そんなご褒美スイーツを皆様におすそわけする場がRINGOです。</p>
+            <p>毎日店頭で焼き上げる、その1つ1つに思いを込め、究極の美味しさを追求します。</p>
           </div>
 
 
@@ -286,200 +263,224 @@
 
 
 
+        </div>
+      </div>
 
 
-          <!-- shop-wrapper -->
-          <div class="shop-wrapper">
-            <!--SP向け-->
-            <div class="row shop-top">
-              <div class="col-12">
-                <div class="sp-ttl">
-                  <span style="color: #959595;">SHOP</span>
-                </div>
-              </div>
+
+
+
+
+      <!-- product-wrapper -->
+      <div class="product-wrapper row">
+        <div class="sp-ttl" style="padding-left: 15px; padding-top: 40px;">
+          <span style="color: #fff;">PRODUCT</span>
+        </div>
+        <div class="col-1 product-left-side">
+          <span class="vertical-writing">PRODUCT</span>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+      <!-- shop-wrapper -->
+      <div class="shop-wrapper">
+        <!--SP向け-->
+        <div class="row shop-top">
+          <div class="col-12">
+            <div class="sp-ttl">
+              <span style="color: #959595;">SHOP</span>
             </div>
+          </div>
+        </div>
 
 
 
 
-            <div class="shop-wrapper-top row">
-              <div class="col-1 shop-left-side">
-                <span class="vertical-writing">SHOP</span>
-              </div>
-
-              
+        <div class="shop-wrapper-top row">
+          <div class="col-1 shop-left-side">
+            <span class="vertical-writing">SHOP</span>
+          </div>
 
 
-              <!--
+
+
+          <!--
               <div class="col-12 shop-middle">
               </div>
               -->
 
 
-              <!--PC向け-->
-              <div class="col-md-11 col-sm-11 col-xs-12 shop-pc" style="padding-left: 0; padding-right: 0;">
-                <div class="img-wrap">
-                  <img src="https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_next_shop.jpg">
-                </div>
-              </div>
-            </div>
-            <div class="shop-wrapper-bottom row">
-              <div class="col-1"></div>
-              <div class="col-md-9 col-sm-9 col-xs-12 shop">
-                <h1 class="shop-title">SHOP LIST</h1>
-              </div>
+          <!--PC向け-->
+          <div class="col-md-11 col-sm-11 col-xs-12 shop-pc" style="padding-left: 0; padding-right: 0;">
+            <div class="img-wrap">
+              <img src="https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_next_shop.jpg">
             </div>
           </div>
-
-
-          <!-- news-wrapper -->
-          <div class="news-wrapper row">
-            <div class="col-md-1 col-sm-1 col-xs-12"></div>
-            <div class="col-md-10 col-sm-10 col-xs-12 news-middle">
-              <h1 class="news-title">NEWS</h1>
-              
-
-              <ul>
-                <li>
-                  <article>
-                    <a href="#">
-                      <div class="news-imgTopLine"></div>
-                      <img class="news-img" src="https://ringo-applepie.com/wp-content/uploads/2020/03/ringo_berygarden_ogp-750x422.jpg">
-                      <h4>BERRY GARDEN 第1弾は、ストロベリーを主役に、3種のレッドベリーが春を運ぶ、「焼きたてカスタードレッドベリーパイ」。3/20(金)からの期間限定販売。</h4>
-                      <span class="date">2020.03.16</span>
-                    </a>
-                  </article>
-                </li>
-                <li>
-                  <article>
-                    <a href="#">
-                      <div class="news-imgTopLine"></div>
-                      <img class="news-img" src="https://ringo-applepie.com/wp-content/uploads/2018/11/ogp_logo-750x422.jpg">
-                      <h4>店舗の営業時間短縮・休館についてのお知らせ</h4>
-                      <span class="date">2020.03.04</span>
-                    </a>
-                  </article>
-                </li>
-                <li>
-                  <article>
-                    <a href="#">
-                      <div class="news-imgTopLine"></div>
-                      <img class="news-img" src="https://ringo-applepie.com/wp-content/uploads/2020/01/2001_ringowhite04-750x422.jpg">
-                      <h4>「焼きたてカスタードアップルパイ・ホワイト」がホワイトデーまでの期間限定で登場</h4>
-                      <span class="date">2020.02.07</span>
-                    </a>
-                  </article>
-                </li>
-                <li>
-                  <article>
-                    <a href="#">
-                      <div class="news-imgTopLine"></div>
-                      <img class="news-img" src="https://ringo-applepie.com/wp-content/uploads/2019/12/choco_2-750x422.jpg">
-                      <h4>限定チョコフレーバーの大口注文の電話予約を全国10店舗でスタート！予約、受取方法のご案内</h4>
-                      <span class="date">2020.01.27</span>
-                    </a>
-                  </article>
-                </li>
-                <li>
-                  <article>
-                    <a href="#">
-                      <div class="news-imgTopLine"></div>
-                      <img class="news-img" src="https://ringo-applepie.com/wp-content/uploads/2019/12/chocomain_yoko-750x422.jpg">
-                      <h4>2020年1月10日より、バレンタイン限定商品「焼きたてチョコカスタードアップルパイ」が登場！</h4>
-                      <span class="date">2019.12.20</span>
-                    </a>
-                  </article>
-                </li>
-                <li>
-                  <article>
-                    <a href="#">
-                      <div class="news-imgTopLine"></div>
-                      <img class="news-img" src="https://ringo-applepie.com/wp-content/uploads/2019/11/180831s13_360r-750x422.jpg">
-                      <h4>年末年始の営業時間変更について（2019/12/30～2020/1/3）</h4>
-                      <span class="date">2019.12.20</span>
-                    </a>
-                  </article>
-                </li>
-                <li>
-                  <article>
-                    <a href="#">
-                      <div class="news-imgTopLine"></div>
-                      <img class="news-img" src="https://ringo-applepie.com/wp-content/uploads/2019/12/mikkaievent_09-750x422.jpg">
-                      <h4>RINGO初のファンイベント「林檎ノ蜜会〜ご褒美のおすそわけ〜」イベントレポート</h4>
-                      <span class="date">2019.12.13</span>
-                    </a>
-                  </article>
-                </li>
-                <li>
-                  <article>
-                    <a href="#">
-                      <div class="news-imgTopLine"></div>
-                      <img class="news-img" src="https://ringo-applepie.com/wp-content/uploads/2019/11/ringo_0125_cover-750x422.jpg">
-                      <h4>大口注文の電話予約を全国11店舗でスタート！アップルパイの予約、受取方法のご案内</h4>
-                      <span class="date">2019.12.13</span>
-                    </a>
-                  </article>
-                </li>
-              </ul>
-            </div>
+        </div>
+        <div class="shop-wrapper-bottom row">
+          <div class="col-1"></div>
+          <div class="col-md-9 col-sm-9 col-xs-12 shop">
+            <h1 class="shop-title">SHOP LIST</h1>
           </div>
+        </div>
+      </div>
+
+
+      <!-- news-wrapper -->
+      <div class="news-wrapper row">
+        <div class="col-md-1 col-sm-1 col-xs-12"></div>
+        <div class="col-md-10 col-sm-10 col-xs-12 news-middle">
+          <h1 class="news-title">NEWS</h1>
+
+
+          <ul>
+            <li>
+              <article>
+                <a href="#">
+                  <div class="news-imgTopLine"></div>
+                  <img class="news-img" src="https://ringo-applepie.com/wp-content/uploads/2020/03/ringo_berygarden_ogp-750x422.jpg">
+                  <h4>BERRY GARDEN 第1弾は、ストロベリーを主役に、3種のレッドベリーが春を運ぶ、「焼きたてカスタードレッドベリーパイ」。3/20(金)からの期間限定販売。</h4>
+                  <span class="date">2020.03.16</span>
+                </a>
+              </article>
+            </li>
+            <li>
+              <article>
+                <a href="#">
+                  <div class="news-imgTopLine"></div>
+                  <img class="news-img" src="https://ringo-applepie.com/wp-content/uploads/2018/11/ogp_logo-750x422.jpg">
+                  <h4>店舗の営業時間短縮・休館についてのお知らせ</h4>
+                  <span class="date">2020.03.04</span>
+                </a>
+              </article>
+            </li>
+            <li>
+              <article>
+                <a href="#">
+                  <div class="news-imgTopLine"></div>
+                  <img class="news-img" src="https://ringo-applepie.com/wp-content/uploads/2020/01/2001_ringowhite04-750x422.jpg">
+                  <h4>「焼きたてカスタードアップルパイ・ホワイト」がホワイトデーまでの期間限定で登場</h4>
+                  <span class="date">2020.02.07</span>
+                </a>
+              </article>
+            </li>
+            <li>
+              <article>
+                <a href="#">
+                  <div class="news-imgTopLine"></div>
+                  <img class="news-img" src="https://ringo-applepie.com/wp-content/uploads/2019/12/choco_2-750x422.jpg">
+                  <h4>限定チョコフレーバーの大口注文の電話予約を全国10店舗でスタート！予約、受取方法のご案内</h4>
+                  <span class="date">2020.01.27</span>
+                </a>
+              </article>
+            </li>
+            <li>
+              <article>
+                <a href="#">
+                  <div class="news-imgTopLine"></div>
+                  <img class="news-img" src="https://ringo-applepie.com/wp-content/uploads/2019/12/chocomain_yoko-750x422.jpg">
+                  <h4>2020年1月10日より、バレンタイン限定商品「焼きたてチョコカスタードアップルパイ」が登場！</h4>
+                  <span class="date">2019.12.20</span>
+                </a>
+              </article>
+            </li>
+            <li>
+              <article>
+                <a href="#">
+                  <div class="news-imgTopLine"></div>
+                  <img class="news-img" src="https://ringo-applepie.com/wp-content/uploads/2019/11/180831s13_360r-750x422.jpg">
+                  <h4>年末年始の営業時間変更について（2019/12/30～2020/1/3）</h4>
+                  <span class="date">2019.12.20</span>
+                </a>
+              </article>
+            </li>
+            <li>
+              <article>
+                <a href="#">
+                  <div class="news-imgTopLine"></div>
+                  <img class="news-img" src="https://ringo-applepie.com/wp-content/uploads/2019/12/mikkaievent_09-750x422.jpg">
+                  <h4>RINGO初のファンイベント「林檎ノ蜜会〜ご褒美のおすそわけ〜」イベントレポート</h4>
+                  <span class="date">2019.12.13</span>
+                </a>
+              </article>
+            </li>
+            <li>
+              <article>
+                <a href="#">
+                  <div class="news-imgTopLine"></div>
+                  <img class="news-img" src="https://ringo-applepie.com/wp-content/uploads/2019/11/ringo_0125_cover-750x422.jpg">
+                  <h4>大口注文の電話予約を全国11店舗でスタート！アップルパイの予約、受取方法のご案内</h4>
+                  <span class="date">2019.12.13</span>
+                </a>
+              </article>
+            </li>
+          </ul>
+        </div>
+      </div>
 
 
 
 
 
 
-          <!-- footer -->
-          <footer>
+      <!-- footer -->
+      <footer>
+        <div class="row">
+          <div class="col-md-1 col-sm-1 col-xs-12"></div>
+
+
+
+
+
+          <div class="col-md-10 col-sm-10 col-xs-12">
+
+
+
+
+
             <div class="row">
-              <div class="col-md-1 col-sm-1 col-xs-12"></div>
-
-
-
-
-
-              <div class="col-md-10 col-sm-10 col-xs-12">
-
-
-
-
-
-                <div class="row">
-                  <div class="col-md-6 col-sm-6 col-xs-12 footer-left">
-                    <div>
-                      <img class="footer-logo" src="https://ringo-applepie.com/wp-content/themes/ringo/assets/img/footer_logo.png">
-                      <p style="margin-bottom: 0;">© BAKE all rights reserved.</p>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-12 footer-right">
-                    <ul>
-                      <li class="footer-li">SOCIAL&nbsp;&nbsp;</li>
-                      <li>
-                        <a href="https://ja-jp.facebook.com/" class="social-icon fab fa-facebook-f"></a>
-                      </li>
-                      <li>
-                        <a href="https://twitter.com/" class="social-icon fab fa-twitter"></a>
-                      </li>
-                      <li>
-                        <a href="https://www.instagram.com/" class="social-icon fab fa-instagram"></a>
-                      </li>
-                    </ul>
-                  </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 footer-left">
+                <div>
+                  <img class="footer-logo" src="https://ringo-applepie.com/wp-content/themes/ringo/assets/img/footer_logo.png">
+                  <p style="margin-bottom: 0;">© BAKE all rights reserved.</p>
                 </div>
-
-
-
-
               </div>
-
-
-
-
-
-              <div class="col-md-1 col-sm-1 col-xs-12"></div>
+              <div class="col-md-6 col-sm-6 col-xs-12 footer-right">
+                <ul>
+                  <li class="footer-li">SOCIAL&nbsp;&nbsp;</li>
+                  <li>
+                    <a href="https://ja-jp.facebook.com/" class="social-icon fab fa-facebook-f"></a>
+                  </li>
+                  <li>
+                    <a href="https://twitter.com/" class="social-icon fab fa-twitter"></a>
+                  </li>
+                  <li>
+                    <a href="https://www.instagram.com/" class="social-icon fab fa-instagram"></a>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </footer>
-        
+
+
+
+
+          </div>
+
+
+
+
+
+          <div class="col-md-1 col-sm-1 col-xs-12"></div>
+        </div>
+      </footer>
+
     </div>
   </div>
 </body>
