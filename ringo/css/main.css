@@ -115,10 +115,19 @@ footer p {
 /*-------------------- all --------------------*/
 
 .all-wrapper {
-  background-color: #d3032b;
-  background-image: url("https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_red.png");
-  background-size: 50% auto;
-  background-attachment: fixed;
+  
+
+
+
+
+  width: 100%;
+    min-width: 960px;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    background: #d3032b url(https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_red.png) repeat center fixed;
+    background-size: 784px 1108px;
 }
 
 
