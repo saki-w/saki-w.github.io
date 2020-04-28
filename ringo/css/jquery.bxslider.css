@@ -54,8 +54,8 @@ ul.bxslider {
 .bx-default-pager {
   position: absolute;
   /*bottom: -30px;*/
-  top: 80%;
-  left: 0px;
+  bottom: 0;
+  left: 60%;
   /*width: 100%;*/
 }
 
@@ -130,9 +130,12 @@ ul.bxslider {
 .bx-wrapper .bx-next:focus {
   background-position: -43px 0;
 }
+.bx-controls-direction{
+  display: none;
+}
 .bx-wrapper .bx-controls-direction a {
   position: absolute;
-  /*top: 50%;*/
+  top: 50%;
   top: 90%;
   margin-top: -16px;
   outline: 0;
