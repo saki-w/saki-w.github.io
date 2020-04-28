@@ -3,6 +3,9 @@
 @media all and (max-width: 670px) {
   .all-wrapper {
     background-size: 100% auto;
+      min-width: 100%;
+      max-width: 100%;
+
   }
   .header-logo,
   .sp-ttl,
