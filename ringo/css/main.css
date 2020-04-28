@@ -29,14 +29,12 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 
+
+
+
 /*-------------------- header --------------------*/
 
-header {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
+
 
 header ul {
   margin-top: 50px;
