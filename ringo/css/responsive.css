@@ -189,6 +189,12 @@
     font-weight: 600;
     line-height: 1.8;
   }
+  .feature-pc{
+  margin: 0;
+}
+.table .date{
+  margin-top: 10px;
+}
   /*-------------------- ②about --------------------*/
   .about-wrapper {
     padding: 40px 0;

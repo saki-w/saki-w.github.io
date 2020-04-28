@@ -196,3 +196,13 @@ ul.bxslider {
   font-size: .85em;
   padding: 10px;
 }
+
+@media all and (max-width: 670px) {
+  .bx-controls {
+    display: none;
+  }
+
+
+
+
+}

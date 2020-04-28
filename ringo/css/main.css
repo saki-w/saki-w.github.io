@@ -178,7 +178,7 @@ footer p {
 
 .feature-img img {
   position: relative;
-  top: 10px;
+  top: 0;
   left: 0;
   width: 100%;
   height: auto;
@@ -245,7 +245,10 @@ footer p {
   transform-origin: right top;
   transform: scale(1, 1);
 }
-
+.feature-pc{
+  margin-left: -15px;
+  margin-right: 15px;
+}
 
 /*-------------------- ②about --------------------*/
 
