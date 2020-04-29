@@ -2,7 +2,6 @@
 
 @media all and (max-width: 670px) {
   .all-wrapper {
-    background-size: 100% auto;
       min-width: 100%;
       max-width: 100%;
 
@@ -27,6 +26,7 @@
     position: fixed;
     top: 20px;
     right: 35px;
+    z-index: 100;
   }
   #drawer-icon span {
     background: #fff;

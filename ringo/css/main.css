@@ -374,7 +374,6 @@ footer p {
 }
 
 .shop-wrapper-bottom {
-  margin-top: -70px;
   padding-top: 110px;
 }
 
@@ -392,6 +391,9 @@ footer p {
   padding-bottom: 75px;
 }
 
+.shop-pc .img-wrap img{
+  height: 465px;
+}
 
 /*-------------------- ⑤news --------------------*/
 
