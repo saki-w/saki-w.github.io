@@ -29,7 +29,16 @@ html {
 }
 
 
-/*-------------------- header --------------------*/
+/*-------------------- menu --------------------*/
+
+.header-left{
+  float: left;
+}
+
+.header-right{
+  float: right;
+}
+
 
 header{
   width: 100%;
