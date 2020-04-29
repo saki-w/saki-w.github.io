@@ -250,7 +250,7 @@
   .img-wrap {
     height: 200px;
   }
-  .img-wrap img {
+  .shop-pc .img-wrap img {
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
@@ -261,15 +261,6 @@
   }
   .img-animation {
     top: 0;
-  }
-  .shop-img {
-    position: relative;
-  }
-  .shop-img img {
-    position: absolute;
-    top: 10%;
-    left: 0;
-    width: 100%;
   }
   .shop-middle {
     background-image: url("https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_next_shop.jpg");
