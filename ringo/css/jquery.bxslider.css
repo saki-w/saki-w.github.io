@@ -26,7 +26,6 @@ ul.bxslider {
 .bx-viewport {
   /*fix other elements on the page moving (on Chrome)*/
   -webkit-transform: translatez(0);
-  height: 330px !important;
 }
 /** THEME
 ===================================*/
@@ -202,6 +201,11 @@ ul.bxslider {
   .bx-pager, .bx-default-pager  {
     position: initial;
     
+  }
+
+  .bx-viewport{
+      height: 330px !important;
+
   }
 
 
