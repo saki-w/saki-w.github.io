@@ -96,21 +96,6 @@ footer a {
   text-decoration: none;
 }
 
-.circle {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  border: 1px solid #fff;
-  text-align: center;
-  line-height: 35px !important;
-  overflow: hidden;
-  position: relative;
-  z-index: 10;
-  display: inline-block;
-  vertical-align: middle;
-  box-sizing: border-box;
-}
-
 footer a:hover {
   color: #d3032b;
   transition: all 0.3s ease;
@@ -146,6 +131,21 @@ footer a:hover {
 
 .footer-right ul li {
   margin-right: 5px;
+}
+
+.circle {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  text-align: center;
+  line-height: 35px !important;
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+  display: inline-block;
+  vertical-align: middle;
+  box-sizing: border-box;
 }
 
 

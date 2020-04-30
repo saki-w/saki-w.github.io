@@ -141,22 +141,17 @@
     line-height: 1.8;
     text-decoration: none;
   }
-  #drawer-content-left{
+  #drawer-content-left {
     font-size: 20px;
-    
-
   }
-  #drawer-content-right{
+  #drawer-content-right {
     font-size: 16px;
-
-    
   }
-  #drawer-content .circle{
+  #drawer-content .circle {
     width: 40px;
-  height: 40px;
-  line-height: 40px !important;
-  font-weight: 400;
-
+    height: 40px;
+    line-height: 40px !important;
+    font-weight: 400;
   }
   /*-------------------- common　--------------------*/
   .col-1,
