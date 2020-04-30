@@ -26,6 +26,7 @@ ul.bxslider {
 .bx-viewport {
   /*fix other elements on the page moving (on Chrome)*/
   -webkit-transform: translatez(0);
+  height: 330px !important;
 }
 /** THEME
 ===================================*/
@@ -198,8 +199,9 @@ ul.bxslider {
 }
 
 @media all and (max-width: 670px) {
-  .bx-controls {
-    display: none;
+  .bx-pager, .bx-default-pager  {
+    position: initial;
+    
   }
 
 

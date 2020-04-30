@@ -87,6 +87,8 @@ header a:hover {
 footer {
   color: #fff;
   padding: 100px 0;
+  font-size: 12px;
+  font-weight: 400;
 }
 
 footer a {
@@ -94,20 +96,31 @@ footer a {
   text-decoration: none;
 }
 
+.circle {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  text-align: center;
+  line-height: 35px !important;
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+  display: inline-block;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
 footer a:hover {
-  color: #fff;
-  opacity: 0.8;
+  color: #d3032b;
   transition: all 0.3s ease;
   text-decoration: none;
+  background: #fff;
 }
 
 .footer-logo {
   width: 118px;
   height: 25px;
-}
-
-footer p {
-  font-size: 15px;
 }
 
 .footer-left {
@@ -129,6 +142,10 @@ footer p {
   top: 50%;
   transform: translateY(-50%);
   right: 15px;
+}
+
+.footer-right ul li {
+  margin-right: 5px;
 }
 
 
@@ -422,7 +439,7 @@ footer p {
   font-feature-settings: 'palt';
 }
 
-.news-middle{
+.news-middle {
   margin: 0 -15px;
 }
 
