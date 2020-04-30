@@ -127,7 +127,6 @@
   }
   #drawer-content ul {
     list-style: none;
-    font-size: 20px;
     padding: 0;
   }
   #drawer-content li {
@@ -136,10 +135,28 @@
     margin-bottom: 5px;
   }
   #drawer-content a {
+    font-weight: 600;
     letter-spacing: .15em;
     color: #fff;
     line-height: 1.8;
-    font-weight: 600;
+    text-decoration: none;
+  }
+  #drawer-content-left{
+    font-size: 20px;
+    
+
+  }
+  #drawer-content-right{
+    font-size: 16px;
+
+    
+  }
+  #drawer-content .circle{
+    width: 40px;
+  height: 40px;
+  line-height: 40px !important;
+  font-weight: 400;
+
   }
   /*-------------------- common　--------------------*/
   .col-1,
