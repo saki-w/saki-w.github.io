@@ -12,6 +12,10 @@
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .2);
 }
 
+ul {
+  padding: 0;
+}
+
 ul li {
   display: inline;
 }
@@ -31,48 +35,46 @@ html {
 
 /*-------------------- menu --------------------*/
 
-.header-left{
+.header-left {
   float: left;
 }
 
-.header-right{
+.header-right {
   float: right;
 }
 
+.header-left a {
+  font-size: 16px;
+}
 
-header{
+.header-right a {}
+
+header {
   width: 100%;
-    min-width: 960px;
-    max-width: 1680px;
-    padding: 20px 0;
-    position: absolute;
-    top: 50px;
-    left: 0;
-    right: 0;
-    margin: auto;
-    z-index: 110;
+  min-width: 960px;
+  max-width: 1680px;
+  padding: 20px 40px;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 110;
 }
 
 header a {
-  font-size: 16px;
   font-weight: 600;
   letter-spacing: .15em;
-}
-
-header ul {
-  padding-right: 40px;
+  vertical-align: middle;
+  color: #fff;
+  text-decoration: none;
 }
 
 header ul li {
   margin-left: 20px;
 }
 
-header ul li a {
-  color: #fff;
-  text-decoration: none;
-}
-
-header ul li a:hover {
+header a:hover {
   color: #f1f1f1;
   opacity: 0.9;
   transition: all 0.3s ease;
@@ -87,12 +89,12 @@ footer {
   padding: 100px 0;
 }
 
-footer ul li a {
+footer a {
   color: #fff;
   text-decoration: none;
 }
 
-footer ul li a:hover {
+footer a:hover {
   color: #fff;
   opacity: 0.8;
   transition: all 0.3s ease;
@@ -147,29 +149,27 @@ footer p {
 /*-------------------- top --------------------*/
 
 .top-wrapper {
-  background-image: url("https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_mainvisual.jpg");
+  background: url("https://ringo-applepie.com/wp-content/themes/ringo/assets/img/background_mainvisual.jpg") no-repeat center;
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
   padding: 400px 0;
 }
 
 
 /*-------------------- ①feature --------------------*/
 
-.table{
+.table {
   display: table;
   width: 100%;
   height: 100%;
 }
 
-.table-cell{
+.table-cell {
   display: table-cell;
-    vertical-align: bottom;
-    padding-bottom: 70px;
+  vertical-align: bottom;
+  padding-bottom: 70px;
 }
 
-.table .date{
+.table .date {
   display: block;
   margin-top: 40px;
 }
@@ -254,10 +254,12 @@ footer p {
   transform-origin: right top;
   transform: scale(1, 1);
 }
-.feature-pc{
+
+.feature-pc {
   margin-left: -15px;
   margin-right: 15px;
 }
+
 
 /*-------------------- ②about --------------------*/
 
@@ -278,8 +280,6 @@ footer p {
   font-size: 16px;
 }
 
-
-
 .img-wrap img {
   position: relative;
   top: 0;
@@ -287,7 +287,6 @@ footer p {
   width: 100%;
   height: auto;
   object-fit: cover;
-
 }
 
 .img-animation {
@@ -400,9 +399,10 @@ footer p {
   padding-bottom: 75px;
 }
 
-.shop-pc .img-wrap img{
+.shop-pc .img-wrap img {
   height: 465px;
 }
+
 
 /*-------------------- ⑤news --------------------*/
 
@@ -420,11 +420,15 @@ footer p {
   font-feature-settings: 'palt';
 }
 
+.news-middle{
+  margin: 0 -15px;
+}
+
 .news-middle ul {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
+  margin: 0 -2%;
 }
 
 .news-middle h4 {
@@ -462,10 +466,6 @@ footer p {
   color: #e4002b;
 }
 
-.news-wrapper ul {
-  margin-bottom: 0;
-}
-
 
 /*-------------------- common　--------------------*/
 
@@ -475,6 +475,7 @@ footer p {
   text-align: center;
   transform: rotate(180deg);
 }
+
 .date {
   color: #999;
   font-size: 12px;
