@@ -299,6 +299,9 @@
     font-size: 13px;
     font-weight: 600;
   }
+  .news-middle{
+  margin: 0;
+}
   /*-------------------- footer --------------------*/
   footer {
     padding: 60px 0;
