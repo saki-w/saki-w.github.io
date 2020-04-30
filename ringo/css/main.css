@@ -336,7 +336,7 @@ footer p {
   -webkit-font-smoothing: antialiased;
 }
 
-.about-message p, img {
+.about-message p {
   margin-bottom: 1em;
   font-size: 15px;
   text-align: justify;
