@@ -1,0 +1,170 @@
+/* register.php 画面表示時に出したい　保留
+.popup {
+position: fixed;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+z-index: 9999;
+opacity: 0;
+visibility: hidden;
+transition: .6s;
+}
+.popup.is-show {
+opacity: 1;
+visibility: visible;
+}
+.popup-inner {
+position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%,-50%);
+width: 100%;
+padding: 50px;
+z-index: 2;
+}
+.popup-inner img {
+width: 100%;
+}
+.close-btn {
+position: absolute;
+right: 0;
+top: 0;
+width: 50px;
+height: 50px;
+line-height: 50px;
+text-align: center;
+cursor: pointer;
+}
+.close-btn i {
+font-size: 20px;
+color: #333;
+}
+.black-background {
+position: absolute;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0,0,0,.4);
+z-index: 1;
+cursor: pointer;
+}
+*/
+.fixed{
+position: fixed;
+left: 0;
+z-index: 1040;
+width: 100%;
+}
+.main{
+padding-top: 7rem !important;
+}
+.my-custom-scrollbar {
+position: relative;
+height: 200px;
+overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+}
+.pink-lighter-hover {
+color: #ec407a;
+-webkit-transition: .4s;
+transition: .4s; }
+.pink-lighter-hover:hover {
+-webkit-transition: .4s;
+transition: .4s;
+color: #f386aa; }
+.pink-darker-hover {
+color: #ec407a;
+-webkit-transition: .4s;
+transition: .4s; }
+.pink-darker-hover:hover {
+-webkit-transition: .4s;
+transition: .4s;
+color: #cb1452; }
+.purple-border textarea {
+border: 1px solid #ba68c8;
+}
+.purple-border .form-control:focus {
+border: 1px solid #ba68c8;
+box-shadow: 0 0 0 0.2rem rgba(186, 104, 200, .25);
+}
+.green-border-focus .form-control:focus {
+border: 1px solid #8bc34a;
+box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, .25);
+}
+.pt-3-half {
+padding-top: 1.4rem;
+}
+.number-input input[type="number"] {
+-webkit-appearance: textfield;
+-moz-appearance: textfield;
+appearance: textfield;
+}
+.number-input input[type=number]::-webkit-inner-spin-button,
+.number-input input[type=number]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+}
+.number-input {
+margin-bottom: 3rem;
+}
+.number-input button {
+-webkit-appearance: none;
+background-color: transparent;
+border: none;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+margin: 0;
+position: relative;
+}
+.number-input button:before,
+.number-input button:after {
+display: inline-block;
+position: absolute;
+content: '';
+height: 2px;
+transform: translate(-50%, -50%);
+}
+.number-input button.plus:after {
+transform: translate(-50%, -50%) rotate(90deg);
+}
+.number-input input[type=number] {
+text-align: center;
+}
+.number-input.number-input {
+border: 1px solid #ced4da;
+width: 10rem;
+border-radius: .25rem;
+}
+.number-input.number-input button {
+width: 2.6rem;
+height: .7rem;
+}
+.number-input.number-input button.minus {
+padding-left: 10px;
+}
+.number-input.number-input button:before,
+.number-input.number-input button:after {
+width: .7rem;
+background-color: #495057;
+}
+.number-input.number-input input[type=number] {
+max-width: 4rem;
+padding: .5rem;
+border: 1px solid #ced4da;
+border-width: 0 1px;
+font-size: 1rem;
+height: 2rem;
+color: #495057;
+}
+@media not all and (min-resolution:.001dpcm) {
+@supports (-webkit-appearance: none) and (stroke-color:transparent) {
+.number-input.def-number-input.safari_only button:before,
+.number-input.def-number-input.safari_only button:after {
+margin-top: -.3rem;
+}
+}
+}
