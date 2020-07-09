@@ -45,7 +45,7 @@ $alert = '';
 $alert_insert = '';
 require_once('config.php');
 session_start();
-//?ログイン処理
+//①ログイン処理
 if(isset($_POST['action']) && $_POST['action'] == 'signin') {
 //DB内でPOSTされたメールアドレスを検索
 try {
@@ -78,7 +78,7 @@ $alert = 'メールアドレス又はパスワードが間違っています。'
 }
 }
 }
-//?新規登録処理
+//②新規登録処理
 if(isset($_POST['action']) && $_POST['action'] == 'signup') {
 //POSTのValidate。
 if (!$email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {

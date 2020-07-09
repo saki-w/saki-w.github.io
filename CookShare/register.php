@@ -2,10 +2,11 @@
 //エラーログ
 ini_set('display_errors', 1);
 ini_set('error_reporting', E_ALL);
-function h($s){
+function h($s)
+{
 return htmlspecialchars($s, ENT_QUOTES, 'utf-8');
 }
-require_once('config.php');
+require_once 'config.php';
 session_start();
 $id = h($_SESSION['ID']);
 $email = h($_SESSION['EMAIL']);
@@ -17,15 +18,15 @@ $data_ddl_categy = $_POST['data_ddl_categy'];
 }
 if (isset($_POST['data_materials'])) {
 $data_materials = $_POST['data_materials'];
-for($i=1; $i<count($data_materials)+1; $i++){
-for($j=0; $j<2; $j++){
-//echo $data_materials[$i][$j]. '----';
+for ($i = 0; $i < count($data_materials); ++$i) {
+for ($j = 0; $j < 2; ++$j) {
+//echo $data_materials[$i][$j].'----';
 }
 }
 }
 if (isset($_POST['data_steps'])) {
 $data_steps = $_POST['data_steps'];
-for($i=1; $i<count($data_steps)+1; $i++){
+for ($i = 0; $i < count($data_steps); ++$i) {
 //echo $data_steps[$i][0]. '----';
 }
 }
@@ -36,14 +37,16 @@ $data_recipe_id = $_POST['data_recipe_id'];
 }
 if (isset($_POST['data_access'])) {
 $data_access = $_POST['data_access'];
-for($i=1; $i<count($data_access)+1; $i++){
-for($j=0; $j<2; $j++){
+for ($i = 0; $i < count($data_access); ++$i) {
+for ($j = 0; $j < 2; ++$j) {
 //echo $data_access[$i][$j]. '----';
 }
 }
 }
-//$data_ddl_matelials = $_POST['data_ddl_matelials'];
-//echo $data_ddl_matelials;
+if (isset($_POST['data_unit_id'])) {
+$data_unit_id = $_POST['data_unit_id'];
+//echo 'data_unit_id:'.$data_unit_id. '----';
+}
 //------------------------------------------------------------JavaScript取得------------------------------------------------------------
 try {
 $dbh = new PDO(DSN, DB_USER, DB_PASS);
@@ -52,45 +55,54 @@ $stmt_users = $dbh->prepare('SELECT * FROM users WHERE id = ?');
 $stmt_users->execute([h($_SESSION['ID'])]);
 $result_users = $stmt_users->fetch();
 //編集モード
-if(isset($_POST['recipe_id'])){
+if (isset($_POST['recipe_id'])) {
 //カテゴリ　タイトル　写真　コメント　取得
 $stmt_recipes = $dbh->prepare('SELECT * FROM recipes WHERE id = ?');
 $stmt_recipes->execute([h($_POST['recipe_id'])]);
 $result_recipes = $stmt_recipes->fetch();
 //材料　取得
-$stmt_materials = $dbh->prepare('SELECT * FROM materials WHERE recipe_id = ?');
+$stmt_materials = $dbh->prepare('SELECT materials.id, recipe_id, no, food_id, quantity, unit_id, unit.name, REPLACE(unit_id, 7, 6) AS unit_id_ddl FROM materials JOIN unit ON materials.unit_id = unit.id WHERE recipe_id = ?');
 $stmt_materials->execute([h($_POST['recipe_id'])]);
-foreach($stmt_materials as $row2){
+foreach ($stmt_materials as $row2) {
 $rows2[] = $row2;
 }
 //作り方　取得
 $stmt_seteps = $dbh->prepare('SELECT * FROM steps WHERE recipe_id = ?');
 $stmt_seteps->execute([h($_POST['recipe_id'])]);
-foreach($stmt_seteps as $row3){
+foreach ($stmt_seteps as $row3) {
 $rows3[] = $row3;
 }
 //公開範囲　取得
 $stmt_access = $dbh->prepare('SELECT * FROM access WHERE recipe_id = ?');
 $stmt_access->execute([h($_POST['recipe_id'])]);
-foreach($stmt_access as $row6){
+foreach ($stmt_access as $row6) {
 $rows6[] = $row6;
 }
 $recipe_id = $_POST['recipe_id'];
 }
 //材料ドロップダウンリスト作成
-foreach($dbh->query('SELECT food_category.id AS category_id, food_category.name AS category_name, foods.id AS foods_id, foods.category_id AS foods_category_id, foods.name AS foods_name FROM food_category JOIN foods ON food_category.id = foods.category_id ORDER BY food_category.id') as $row) {
+foreach ($dbh->query('SELECT food_category.id AS category_id, food_category.name AS category_name, foods.id AS foods_id, foods.category_id AS foods_category_id, foods.name AS foods_name, unit_id FROM food_category JOIN foods ON food_category.id = foods.category_id ORDER BY food_category.id') as $row) {
 $rows[] = $row;
 }
 //カテゴリドロップダウンリスト作成
-foreach($dbh->query('SELECT cuisine_category.id AS category_id, cuisine_category.name AS category_name, cuisines.id AS cuisines_id, cuisines.category_id AS cuisines_category_id, cuisines.name AS cuisines_name FROM cuisine_category JOIN cuisines ON cuisine_category.id = cuisines.category_id ORDER BY cuisine_category.id') as $row4) {
+foreach ($dbh->query('SELECT cuisine_category.id AS category_id, cuisine_category.name AS category_name, cuisines.id AS cuisines_id, cuisines.category_id AS cuisines_category_id, cuisines.name AS cuisines_name FROM cuisine_category JOIN cuisines ON cuisine_category.id = cuisines.category_id ORDER BY cuisine_category.id') as $row4) {
 $rows4[] = $row4;
 }
 //公開範囲　テーブル作成
 $stmt_users2 = $dbh->prepare('SELECT * FROM  users WHERE id <> ?');
 $stmt_users2->execute([h($_SESSION['ID'])]);
-foreach($stmt_users2 as $row5){
+foreach ($stmt_users2 as $row5) {
 $rows5[] = $row5;
 }
+//材料ドロップダウンリストに合わせて、数量の単位を変更
+if (isset($data_unit_id)) {
+$stmt_unit = $dbh->prepare('SELECT * FROM unit WHERE id = ?');
+$stmt_unit->execute([(int) $data_unit_id]);
+$result_unit = $stmt_unit->fetch();
+echo $result_unit['id'].','.$result_unit['name'];
+}
+//編集モード
+$count = 0;
 //------------------------------------------------------------タイトル　写真　コメント------------------------------------------------------------
 $alert_profile = '';
 if(isset($_POST['action']) && ($_POST['action'] == 'insert' || $_POST['action'] == 'update')) {
@@ -105,6 +117,12 @@ $txtComment = null;
 } else{
 $txtComment = h($_POST["txtComment"]);
 }
+//人数
+if(h($_POST["txtPersons"]) === ''){
+$txtPersons = null;
+} else{
+$txtPersons = h($_POST["txtPersons"]);
+}
 //写真
 if (is_uploaded_file($tempfile)) {
 if ( move_uploaded_file($tempfile , $filename )) {
@@ -116,29 +134,29 @@ $image = null;
 }
 if($_POST['action'] == 'insert'){
 //新規登録
-$stmt_recipes = $dbh->prepare('INSERT INTO recipes (cuisine_id, title, image_url, user_id, comment) VALUES (?, ?, ?, ?, ?)');
-$stmt_recipes->execute([0, h($_POST['txtTitle']), $image, h($_SESSION['ID']), $txtComment]);
+$stmt_recipes = $dbh->prepare('INSERT INTO recipes (cuisine_id, title, image_url, user_id, comment, number_of_persons) VALUES (?, ?, ?, ?, ?, ?)');
+$stmt_recipes->execute([0, h($_POST['txtTitle']), $image, h($_SESSION['ID']), $txtComment, $txtPersons]);
 } else if($_POST['action'] == 'update'){
 //更新
-$stmt_recipes = $dbh->prepare('UPDATE recipes SET cuisine_id = ?, title = ?, image_url = ?, comment = ? WHERE id = ?');
-$stmt_recipes->execute([0, h($_POST['txtTitle']), $image, $txtComment, $_POST['recipe_id']]);
+$stmt_recipes = $dbh->prepare('UPDATE recipes SET cuisine_id = ?, title = ?, image_url = ?, comment = ?, number_of_persons = ? WHERE id = ?');
+$stmt_recipes->execute([0, h($_POST['txtTitle']), $image, $txtComment, $txtPersons, $_POST['recipe_id']]);
 }
 }else{ //ファイルが未選択の場合
 if($_POST['action'] == 'insert'){
 //新規登録
 $image = null;
-$stmt_recipes = $dbh->prepare('INSERT INTO recipes (cuisine_id, title, image_url, user_id, comment) VALUES (?, ?, ?, ?, ?)');
-$stmt_recipes->execute([0, h($_POST['txtTitle']), $image, h($_SESSION['ID']), $txtComment]);
+$stmt_recipes = $dbh->prepare('INSERT INTO recipes (cuisine_id, title, image_url, user_id, comment, number_of_persons) VALUES (?, ?, ?, ?, ?, ?)');
+$stmt_recipes->execute([0, h($_POST['txtTitle']), $image, h($_SESSION['ID']), $txtComment, $txtPersons]);
 } else if($_POST['action'] == 'update'){
 if($_POST['btnImgeRecipesDel_flg'] === "1") {
 //更新　画像が削除された場合
 $image = null;
-$stmt_recipes = $dbh->prepare('UPDATE recipes SET cuisine_id = ?, title = ?, image_url = ?, comment = ? WHERE id = ?');
-$stmt_recipes->execute([0, h($_POST['txtTitle']), $image, $txtComment, $_POST['recipe_id']]);
+$stmt_recipes = $dbh->prepare('UPDATE recipes SET cuisine_id = ?, title = ?, image_url = ?, comment = ?, number_of_persons = ? WHERE id = ?');
+$stmt_recipes->execute([0, h($_POST['txtTitle']), $image, $txtComment, $txtPersons, $_POST['recipe_id']]);
 }else{
 //更新　画像が変更がない場合
-$stmt_recipes = $dbh->prepare('UPDATE recipes SET cuisine_id = ?, title = ?, comment = ? WHERE id = ?');
-$stmt_recipes->execute([0, h($_POST['txtTitle']), $txtComment, $_POST['recipe_id']]);
+$stmt_recipes = $dbh->prepare('UPDATE recipes SET cuisine_id = ?, title = ?, comment = ?, number_of_persons = ? WHERE id = ?');
+$stmt_recipes->execute([0, h($_POST['txtTitle']), $txtComment, $txtPersons, $_POST['recipe_id']]);
 }
 }
 }
@@ -146,6 +164,9 @@ $stmt_recipes->execute([0, h($_POST['txtTitle']), $txtComment, $_POST['recipe_id
 if($_POST['action'] == 'update'){
 $stmt_list = $dbh->prepare('UPDATE list SET edit_flg = 1 WHERE recipe_id = ?');
 $stmt_list->execute([$_POST['recipe_id']]);
+//$stmt_list = $dbh->prepare('UPDATE list SET edit_flg = ( SELECT CASE user_id WHEN :user_id THEN 0 ELSE 1 END FROM recipes WHERE id = :recipe_id ) WHERE recipe_id = :recipe_id');
+//$stmt_list->bindParam(':user_id',$id, PDO::PARAM_INT);
+//$stmt_list->bindParam(':recipe_id',$_POST['recipe_id'], PDO::PARAM_INT);
 }
 $alert_profile = '登録しました！';
 header( "Location: index.php" ) ;
@@ -171,29 +192,38 @@ $stmt_DELETE_materials->execute([(int)$data_recipe_id]);
 $stmt_DELETE_steps = $dbh->prepare('DELETE FROM steps WHERE recipe_id = ?');
 $stmt_DELETE_steps->execute([(int)$data_recipe_id]);
 }
+for($i=0; $i<count($data_materials); $i++){
+//food_id　取得
+$col1 = explode(',',$data_materials[$i][0]);
+$food_id = $col1[0];
+//quantity　unit_id　取得
+$col2 = explode(',',$data_materials[$i][1]);
+//quantity
+$quantity = $col2[0];
+//unit_id
+$unit_id = $col2[1];
 //materials INSERT
-for($i=1; $i<count($data_materials)+1; $i++){
 if($data_recipe_id === '0'){
 //新規登録
-${"stmt_materials{$i}"} = $dbh->prepare('INSERT INTO materials (recipe_id, no, food_id, name, quantity, unit_id) VALUES ((SELECT MAX(id)+1 FROM recipes), ?, 0, ?, ?, NULL)');
-${"stmt_materials{$i}"}->execute([$i, $data_materials[$i][0], $data_materials[$i][1]]);
+${"stmt_materials{$i}"} = $dbh->prepare('INSERT INTO materials (recipe_id, no, food_id, quantity, unit_id) VALUES ((SELECT MAX(id)+1 FROM recipes), ?, ?, ?, ?)');
+${"stmt_materials{$i}"}->execute([$i+1, (int)$food_id, (int)$quantity, (int)$unit_id]);
 }
 else {
 //更新
-${"stmt_materials{$i}"} = $dbh->prepare('INSERT INTO materials (recipe_id, no, food_id, name, quantity, unit_id) VALUES (?, ?, 0, ?, ?, NULL)');
-${"stmt_materials{$i}"}->execute([(int)$data_recipe_id, $i, $data_materials[$i][0], $data_materials[$i][1]]);
+${"stmt_materials{$i}"} = $dbh->prepare('INSERT INTO materials (recipe_id, no, food_id, quantity, unit_id) VALUES (?, ?, ?, ?, ?)');
+${"stmt_materials{$i}"}->execute([(int)$data_recipe_id, $i+1, (int)$food_id, (int)$quantity, (int)$unit_id]);
 }
 } 
 //steps INSERT
-for($i=1; $i<count($data_steps)+1; $i++){
+for($i=0; $i<count($data_steps); $i++){
 if($data_recipe_id === '0'){
 //新規登録
 ${"stmt_steps{$i}"} = $dbh->prepare('INSERT INTO steps (recipe_id, no, content) VALUES ((SELECT MAX(id)+1 FROM recipes), ?, ?)');
-${"stmt_steps{$i}"}->execute([$i, $data_steps[$i][0]]);
+${"stmt_steps{$i}"}->execute([$i+1, $data_steps[$i][0]]);
 }else {
 //更新
 ${"stmt_steps{$i}"} = $dbh->prepare('INSERT INTO steps (recipe_id, no, content) VALUES (?, ?, ?)');
-${"stmt_steps{$i}"}->execute([(int)$data_recipe_id, $i, $data_steps[$i][0]]);
+${"stmt_steps{$i}"}->execute([(int)$data_recipe_id, $i+1, $data_steps[$i][0]]);
 }
 }
 }
@@ -205,7 +235,7 @@ if($data_recipe_id !== '0'){
 $stmt_DELETE_access = $dbh->prepare('DELETE FROM access WHERE recipe_id = ?');
 $stmt_DELETE_access->execute([(int)$data_recipe_id]);
 }
-for($i=1; $i<count($data_access)+1; $i++){
+for($i=0; $i<count($data_access); $i++){
 if($data_recipe_id === '0'){
 if($data_access[$i][0] === 'on'){
 //新規登録
@@ -241,7 +271,7 @@ $stmt_recipes_category->execute([(int)$_SESSION['CATEGORY'], (int)$_SESSION['REC
 //------------------------------------------------------------カテゴリ------------------------------------------------------------
 $dbh = null;
 } catch (PDOException $e) {
-print "エラー!: " . $e->getMessage() . "<br/>";
+print 'エラー!: '.$e->getMessage().'<br/>';
 die();
 }
 ?>
@@ -300,13 +330,13 @@ die();
           <ul class="navbar-nav ml-auto nav-flex-icons">
             <li class="nav-item dropdown">
               <button class="btn btn-light-green dropdown-toggle mr-4" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-transform: none;">
-                <?php if(trim($result_users['image_path']) !== ''): ?>
+                <?php if (trim($result_users['image_path']) !== ''): ?>
                 <img src="image/users/<?= $result_users['image_path'] ?>" class="rounded-circle z-depth-0" alt="avatar image" height="20">
-                <?php elseif(trim($result_users['image_path']) === ''): ?>
+                <?php elseif (trim($result_users['image_path']) === ''): ?>
                 <img src="image/users/noimage.jpg" class="rounded-circle z-depth-0" alt="avatar image" height="20">
                 <?php else: ?>
                 <?php endif; ?>
-                <?= $result_users['name']."さん" ?>
+                <?= $result_users['name'].'さん' ?>
               </button>
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="./favorites.php">
@@ -364,8 +394,8 @@ die();
 <a class="dropdown-item" data-value="0" data-level="1" data-default-selected="" href="#">選択してください
 </a>
 <?php $old_category_id = '' ?>
-<?php foreach($rows4 as $row4): ?>
-<?php if($old_category_id !== $row4['category_id']): ?>
+<?php foreach ($rows4 as $row4): ?>
+<?php if ($old_category_id !== $row4['category_id']): ?>
 <a class="dropdown-item no_link" data-value="<?= $row4['category_id']?>" data-level="1">
 <?= $row4['category_name']?>
 </a>
@@ -381,7 +411,7 @@ die();
 <?php endforeach; ?>
 </div>
 </div>
-<?php if(!isset($result_recipes['cuisine_id'])): ?>
+<?php if (!isset($result_recipes['cuisine_id'])): ?>
 <input class="d-none" name="ddl_categy" readonly="readonly" aria-hidden="true" type="text">
 <?php else: ?>
 <input class="d-none" name="ddl_categy" readonly="readonly" aria-hidden="true" type="text" value="<?= $result_recipes['cuisine_id']?>">
@@ -408,7 +438,7 @@ die();
 -->
     <div class="text-center">
       <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modal_category">
-        <?php if(!isset($_POST['recipe_id'])): ?> レシピ登録を始める
+        <?php if (!isset($_POST['recipe_id'])): ?> レシピ登録を始める
         <?php else: ?> レシピ編集を始める
         <?php endif; ?>
       </a>
@@ -443,8 +473,8 @@ die();
                           <a class="dropdown-item" data-value="0" data-level="1" data-default-selected="" href="#">選択してください
                           </a>
                           <?php $old_category_id = '' ?>
-                          <?php foreach($rows4 as $row4): ?>
-                          <?php if($old_category_id !== $row4['category_id']): ?>
+                          <?php foreach ($rows4 as $row4): ?>
+                          <?php if ($old_category_id !== $row4['category_id']): ?>
                           <a class="dropdown-item no_link" data-value="<?= $row4['category_id']?>" data-level="1">
                             <?= $row4['category_name']?>
                           </a>
@@ -460,7 +490,7 @@ die();
                           <?php endforeach; ?>
                         </div>
                       </div>
-                      <?php if(!isset($result_recipes['cuisine_id'])): ?>
+                      <?php if (!isset($result_recipes['cuisine_id'])): ?>
                       <input class="d-none" name="ddl_categy" readonly="readonly" aria-hidden="true" type="text">
                       <?php else: ?>
                       <input class="d-none" name="ddl_categy" readonly="readonly" aria-hidden="true" type="text" value="<?= $result_recipes['cuisine_id']?>">
@@ -496,7 +526,7 @@ die();
                   <h3 class="card-header text-center font-weight-bold text-uppercase py-4">タイトルの入力
                   </h3>
                   <div class="card-body">
-                    <?php if(!isset($result_recipes['title'])): ?>
+                    <?php if (!isset($result_recipes['title'])): ?>
                     <input type="text" id="txtTitle" name="txtTitle" class="form-control mb-4" placeholder="例）具沢山カレーライス">
                     <?php else: ?>
                     <input type="text" id="txtTitle" name="txtTitle" class="form-control mb-4" placeholder="例）具沢山カレーライス" value="<?= $result_recipes['title']?>">
@@ -533,7 +563,7 @@ die();
                   </h3>
                   <div class="card-body">
                     <!-- サムネイル -->
-                    <?php if(isset($result_recipes['image_url'])): ?>
+                    <?php if (isset($result_recipes['image_url'])): ?>
                     <img id="thumbnail" src="image/recipes/<?= $result_recipes['image_url']?>" alt="avatar" class="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1" width="50" height="50">
                     <?php else:?>
                     <img id="thumbnail" src="image/recipes/noimage.png" alt="avatar" class="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1" width="50" height="50">
@@ -589,6 +619,14 @@ die();
                   <h3 class="card-header text-center font-weight-bold text-uppercase py-4">材料・調味料の入力
                   </h3>
                   <div class="card-body">
+                    <div class="form-inline">
+                      <?php if (isset($result_recipes['number_of_persons'])): ?>
+                      <input type="number" id="txtPersons" name="txtPersons" class="form-control mb-4" value="<?= $result_recipes['number_of_persons']?>">
+                      <?php else: ?>
+                      <input type="number" id="txtPersons" name="txtPersons" class="form-control mb-4">
+                      <?php endif; ?>
+                      人分
+                    </div>
                     <div id="table" class="table-editable">
                       <table class="table table-bordered table-responsive-md table-striped text-center">
                         <thead>
@@ -596,6 +634,7 @@ die();
                             <th class="text-center">材料・調味料
                             </th>
                             <th class="text-center">分量
+                              <!--<br>（※適量の場合は0を入力してください）-->
                             </th>
                             <th class="text-center">
                             </th>
@@ -605,49 +644,82 @@ die();
                         </thead>
                         <tbody>
                           <!--編集モード-->
-                          <?php if(isset($_POST['recipe_id'])): ?>
-                          <?php foreach($rows2 as $row2): ?>
+                          <?php if (isset($_POST['recipe_id'])): ?>
+                          <?php foreach ($rows2 as $row2): ?>
                           <tr class="hide">
                             <td class="pt-3-half">
-                              <input type="text" id="txtMaterial" name="txtMaterial" class="form-control mb-4" placeholder="例）にんじん" value="<?= $row2['name']?>">
-                              <!--
-<div class="dropdown hierarchy-select select" id="ddl_matelials">
-<button type="button" class="btn btn-secondary dropdown-toggle" id="example-one-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-</button>
-<div class="dropdown-menu" aria-labelledby="example-one-button">
-<div class="hs-searchbox">
-<input type="text" class="form-control" autocomplete="off">
-</div>
-<div class="hs-menu-inner">
-<a class="dropdown-item" data-value="0" data-level="1" data-default-selected="" href="#">選択してください
-</a>
-<?php $old_category_id = '' ?>
-<?php foreach($rows as $row): ?>
-<?php if($old_category_id !== $row['category_id']): ?>
-<a class="dropdown-item no_link" data-value="<?= $row['category_id']?>" data-level="1">
-<?= $row['category_name']?>
-</a>
-<a class="dropdown-item" data-value="<?= $row['foods_id']?>" data-level="2" href="#">
-<?= $row['foods_name']?>
-</a>
-<?php else: ?>
-<a class="dropdown-item" data-value="<?= $row['foods_id']?>" data-level="2" href="#">
-<?= $row['foods_name']?>
-</a>
-<?php endif; ?>
-<?php $old_category_id = $row['category_id'] ?>
-<?php endforeach; ?>
-</div>
-</div>
-<input class="d-none" name="ddl_matelials" readonly="readonly" aria-hidden="true" type="text" value="<?= $row2['food_id']?>">
-<input type="hidden" name="food_id" value="<?= $row2['food_id']?>">
-<p>
-</p>
-</div>
--->
+                              <!--<input type="text" id="txtMaterial" name="txtMaterial" class="form-control mb-4" placeholder="例）にんじん" value="<?= $row2['name']?>">-->
+                              <div class="dropdown hierarchy-select ddl_matelials" id="ddl_matelials<?= $count?>">
+                                <button type="button" class="btn btn-secondary dropdown-toggle" id="example-one-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="example-one-button">
+                                  <div class="hs-searchbox">
+                                    <input type="text" class="form-control" autocomplete="off">
+                                  </div>
+                                  <div class="hs-menu-inner">
+                                    <a class="dropdown-item" data-value="0" data-level="1" data-default-selected="" href="#">選択してください
+                                    </a>
+                                    <?php $old_category_id = '' ?>
+                                    <?php foreach ($rows as $row): ?>
+                                    <?php if ($old_category_id !== $row['category_id']): ?>
+                                    <a class="dropdown-item no_link" data-value="<?= $row['category_id']?>" data-level="1">
+                                      <?= $row['category_name']?>
+                                    </a>
+                                    <a class="dropdown-item" data-value="<?= $row['foods_id']?>,<?= $row['unit_id']?>" data-level="2" href="#">
+                                      <?= $row['foods_name']?>
+                                    </a>
+                                    <?php else: ?>
+                                    <a class="dropdown-item" data-value="<?= $row['foods_id']?>,<?= $row['unit_id']?>" data-level="2" href="#">
+                                      <?= $row['foods_name']?>
+                                    </a>
+                                    <?php endif; ?>
+                                    <?php $old_category_id = $row['category_id'] ?>
+                                    <?php endforeach; ?>
+                                  </div>
+                                </div>
+                                <input class="d-none input_name" id="input_name<?= $count?>" name="ddl_matelials<?= $count?>" readonly="readonly" aria-hidden="true" type="text" value="<?= $row2['food_id']?>,<?= $row2['unit_id_ddl']?>">
+                                <input class="ddl" type="hidden">
+                              </div>
                             </td>
                             <td class="pt-3-half">
-                              <input type="text" id="txtQuantity" name="txtQuantity" class="form-control mb-4" value="<?= $row2['quantity']?>">
+                              <!--<input type="text" id="txtQuantity" name="txtQuantity" class="form-control mb-4" value="<?= $row2['quantity']?>">-->
+                              <div class="spoonGroup" id="spoonGroup<?= $count?>">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                  <?php if(trim($row2['unit_id']) === '6'): ?>
+                                  <input type="radio" class="custom-control-input rbTablespoon" id="rbTablespoon<?= $count?>" name="spoonGroup<?= $count?>" value="6" checked>
+                                  <?php elseif(trim($row2['unit_id']) === '7'): ?>
+                                  <input type="radio" class="custom-control-input rbTablespoon" id="rbTablespoon<?= $count?>" name="spoonGroup<?= $count?>" value="6">
+                                  <?php else: ?>
+                                  <input type="radio" class="custom-control-input rbTablespoon" id="rbTablespoon<?= $count?>" name="spoonGroup<?= $count?>" value="6" checked>
+                                  <?php endif; ?>
+                                  <label class="custom-control-label lblTablespoon" for="rbTablespoon<?= $count?>">大さじ
+                                  </label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                  <?php if(trim($row2['unit_id']) === '6'): ?>
+                                  <input type="radio" class="custom-control-input rbTeaspoon" id="rbTeaspoon<?= $count?>" name="spoonGroup<?= $count?>" value="7">
+                                  <?php elseif(trim($row2['unit_id']) === '7'): ?>
+                                  <input type="radio" class="custom-control-input rbTeaspoon" id="rbTeaspoon<?= $count?>" name="spoonGroup<?= $count?>" value="7" checked>
+                                  <?php else: ?>
+                                  <input type="radio" class="custom-control-input rbTeaspoon" id="rbTeaspoon<?= $count?>" name="spoonGroup<?= $count?>" value="7">
+                                  <?php endif; ?>
+                                  <label class="custom-control-label lblTeaspoon" for="rbTeaspoon<?= $count?>">小さじ
+                                  </label>
+                                </div>
+                              </div>
+                              <input id="unit_id<?= $count?>" type="hidden" value="<?= $row2['unit_id']?>" class="unit_id">
+                              <div class="form-inline">
+                                <input type="number" id="txtQuantity<?= $count?>" name="txtQuantity<?= $count?>" class="form-control mb-4 txtQuantity" value="<?= $row2['quantity']?>">
+                                <label id="lblQuantity<?= $count?>" class="lblQuantity">
+                                  <?php if (isset($row2['unit_id']) && isset($row2['name'])): ?>
+                                  <?php if (trim($row2['unit_id']) === '6' || trim($row2['unit_id']) === '7'): ?>
+                                  杯
+                                  <?php else: ?>
+                                  <?= $row2['name']?>
+                                  <?php endif; ?>
+                                  <?php endif; ?>
+                                </label>
+                              </div>
                             </td>
                             <td class="pt-3-half">
                               <span class="table-up">
@@ -670,49 +742,81 @@ die();
                               </span>
                             </td>
                           </tr>
+                          <?php $count++ ?>
                           <?php endforeach; ?>
                           <!--新規モード-->
                           <?php else: ?>
                           <tr class="hide">
                             <td class="pt-3-half">
-                              <input type="text" id="txtMaterial" name="txtMaterial" class="form-control mb-4" placeholder="例）にんじん">
-                              <!--修正中 ドロップダウンリスト
-<div class="dropdown hierarchy-select" id="ddl_matelials">
-<button type="button" class="btn btn-secondary dropdown-toggle" id="example-one-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-</button>
-<div class="dropdown-menu" aria-labelledby="example-one-button">
-<div class="hs-searchbox">
-<input type="text" class="form-control" autocomplete="off">
-</div>
-<div class="hs-menu-inner">
-<a class="dropdown-item" data-value="0" data-level="1" data-default-selected="" href="#">選択してください
-</a>
-<?php $old_category_id = '' ?>
-<?php foreach($rows as $row): ?>
-<?php if($old_category_id !== $row['category_id']): ?>
-<a class="dropdown-item no_link" data-value="<?= $row['category_id']?>" data-level="1">
-<?= $row['category_name']?>
-</a>
-<a class="dropdown-item" data-value="<?= $row['foods_id']?>" data-level="2" href="#">
-<?= $row['foods_name']?>
-</a>
-<?php else: ?>
-<a class="dropdown-item" data-value="<?= $row['foods_id']?>" data-level="2" href="#">
-<?= $row['foods_name']?>
-</a>
-<?php endif; ?>
-<?php $old_category_id = $row['category_id'] ?>
-<?php endforeach; ?>
-</div>
-</div>
-<input class="d-none" name="ddl_matelials" readonly="readonly" aria-hidden="true" type="text">
-<p>
-</p>
-</div>
-修正中 ドロップダウンリスト-->
+                              <!--<input type="text" id="txtMaterial" name="txtMaterial" class="form-control mb-4" placeholder="例）にんじん">-->
+                              <div class="dropdown hierarchy-select ddl_matelials" id="ddl_matelials0">
+                                <button type="button" class="btn btn-secondary dropdown-toggle" id="example-one-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="example-one-button">
+                                  <div class="hs-searchbox">
+                                    <input type="text" class="form-control" autocomplete="off">
+                                  </div>
+                                  <div class="hs-menu-inner">
+                                    <a class="dropdown-item" data-value="0" data-level="1" data-default-selected="" href="#">選択してください
+                                    </a>
+                                    <?php $old_category_id = '' ?>
+                                    <?php foreach ($rows as $row): ?>
+                                    <?php if ($old_category_id !== $row['category_id']): ?>
+                                    <a class="dropdown-item no_link" data-value="<?= $row['category_id']?>" data-level="1">
+                                      <?= $row['category_name']?>
+                                    </a>
+                                    <a class="dropdown-item" data-value="<?= $row['foods_id']?>,<?= $row['unit_id']?>" data-level="2" href="#">
+                                      <?= $row['foods_name']?>
+                                    </a>
+                                    <?php else: ?>
+                                    <a class="dropdown-item" data-value="<?= $row['foods_id']?>,<?= $row['unit_id']?>" data-level="2" href="#">
+                                      <?= $row['foods_name']?>
+                                    </a>
+                                    <?php endif; ?>
+                                    <?php $old_category_id = $row['category_id'] ?>
+                                    <?php endforeach; ?>
+                                  </div>
+                                </div>
+                                <input class="d-none input_name" id="input_name0" name="ddl_matelials0" readonly="readonly" aria-hidden="true" type="text">
+                                <input class="ddl" type="hidden">
+                              </div>
                             </td>
-                            <td class="pt-3-half">
-                              <input type="text" id="txtQuantity" name="txtQuantity" class="form-control mb-4" placeholder="例）1">
+                            <td class="pt-3-half text-left">
+                              <div class="spoonGroup" id="spoonGroup0">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                  <input type="radio" class="custom-control-input rbTablespoon" id="rbTablespoon0" name="spoonGroup0" value="6" checked>
+                                  <label class="custom-control-label lblTablespoon" for="rbTablespoon0">大さじ
+                                  </label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                  <input type="radio" class="custom-control-input rbTeaspoon" id="rbTeaspoon0" name="spoonGroup0" value="7">
+                                  <label class="custom-control-label lblTeaspoon" for="rbTeaspoon0">小さじ
+                                  </label>
+                                </div>
+                              </div>
+                              <?php if (isset($result_unit['id'])): ?>
+                              <input id="unit_id0" type="hidden" value="<?= $result_unit['id']?>" class="unit_id">
+                              <?php else: ?>
+                              <input id="unit_id0" type="hidden" class="unit_id">
+                              <?php endif; ?>
+                              <div class="form-inline">
+                                <input type="number" id="txtQuantity0" name="txtQuantity0" class="form-control mb-4 txtQuantity" disabled="true">
+                                <label id="lblQuantity0" class="lblQuantity">
+                                  <?php if (isset($result_unit['id']) && isset($result_unit['name'])): ?>
+                                  <?php if (trim($result_unit['id']) === '6' || trim($result_unit['id']) === '7'): ?>
+                                  杯
+                                  <?php else: ?>
+                                  <?= $result_unit['name']?>
+                                  <?php endif; ?>
+                                  <?php endif; ?>
+                                </label>
+                              </div>
+                              <!--
+<div class="custom-control custom-checkbox text-left">
+<input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+<label class="custom-control-label" for="defaultUnchecked">適量</label>
+</div>
+-->
                             </td>
                             <td class="pt-3-half">
                               <span class="table-up">
@@ -738,7 +842,7 @@ die();
                           <?php endif; ?>
                         </tbody>
                       </table>
-                      <span class="table-add float-left mb-3 mr-2">
+                      <span class="table-add float-left mb-3 mr-2" id="table-add">
                         <a href="#!" class="text-success">
                           <i class="fas fa-plus fa-2x" aria-hidden="true">行を追加する
                           </i>
@@ -789,8 +893,8 @@ die();
                           </tr>
                         </thead>
                         <tbody>
-                          <?php if(isset($_POST['recipe_id'])): ?>
-                          <?php foreach($rows3 as $row3): ?>
+                          <?php if (isset($_POST['recipe_id'])): ?>
+                          <?php foreach ($rows3 as $row3): ?>
                           <tr class="hide">
                             <td class="pt-3-half">
                               <div class="col-auto">
@@ -905,7 +1009,7 @@ die();
                   <h3 class="card-header text-center font-weight-bold text-uppercase py-4">コメントの入力（任意）
                   </h3>
                   <div class="card-body">
-                    <?php if(!isset($result_recipes['comment'])): ?>
+                    <?php if (!isset($result_recipes['comment'])): ?>
                     <input type="text" id="txtComment" name="txtComment" class="form-control mb-4" placeholder="例）簡単に作れるよ！">
                     <?php else: ?>
                     <input type="text" id="txtComment" name="txtComment" class="form-control mb-4" placeholder="例）簡単に作れるよ！" value="<?= $result_recipes['comment']?>">
@@ -944,6 +1048,7 @@ die();
                     <h4 class="text-center font-weight-bold text-uppercase py-4">レシピを公開したいユーザを選択してください
                     </h4>
                     <div id="tb_access">
+                      <?php if (isset($rows5)): ?>
                       <table class="table">
                         <thead class="grey lighten-3">
                           <tr>
@@ -960,13 +1065,13 @@ die();
                           </tr>
                         </thead>
                         <tbody id="boxes">
-                          <?php foreach($rows5 as $row5): ?>
+                          <?php foreach ($rows5 as $row5): ?>
                           <tr>
                             <td>
                               <div class="custom-control custom-switch">
-                                <?php if(isset($rows6)): ?>
-                                <?php foreach($rows6 as $row6): ?>
-                                <?php if($row5['id'] === $row6['user_id']): ?>
+                                <?php if (isset($rows6)): ?>
+                                <?php foreach ($rows6 as $row6): ?>
+                                <?php if ($row5['id'] === $row6['user_id']): ?>
                                 <input type="checkbox" class="custom-control-input" id="<?= $row5['id'] ?>" name="chk[]" checked>
                                 <?php else: ?>
                                 <input type="checkbox" class="custom-control-input" id="<?= $row5['id'] ?>" name="chk[]">
@@ -981,9 +1086,9 @@ die();
                               <!--<label><input type="checkbox" name="chk[]"></label>-->
                             </td>
                             <td>
-                              <?php if(trim($row5['image_path']) !== ''): ?>
+                              <?php if (trim($row5['image_path']) !== ''): ?>
                               <img src="image/users/<?= $row5['image_path'] ?>" class="rounded-circle z-depth-0" alt="avatar image" height="50">
-                              <?php elseif(trim($row5['image_path']) === ''): ?>
+                              <?php elseif (trim($row5['image_path']) === ''): ?>
                               <img src="image/users/noimage.jpg" class="rounded-circle z-depth-0" alt="avatar image" height="50">
                               <?php else: ?>
                               <?php endif; ?>
@@ -994,13 +1099,17 @@ die();
                           <?php endforeach; ?>
                         </tbody>
                       </table>
+                      <?php else: ?>
+                      <div class="alert alert-warning" role="alert">データはありません。
+                      </div>
+                      <?php endif; ?>
                     </div>
                   </div>
                 </div>
                 <div class="modal-footer justify-content-center">
                   <button class="btn btn-info my-4" data-toggle="modal" data-target="#modal_comment" data-dismiss="modal" type="submit" id="btnCategory">＜＜　コメントの入力へ戻る
                   </button>
-                  <?php if(isset($_POST['recipe_id'])): ?>
+                  <?php if (isset($_POST['recipe_id'])): ?>
                   <button class="btn btn-primary my-4 registration" id="update" type="submit" name="action" value="update">更新
                   </button>
                   <input id="recipe_id" type="hidden" name="recipe_id" value="<?= $_POST['recipe_id'] ?>">
@@ -1038,7 +1147,7 @@ die();
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
     </script>
     <script>
-      //入力された材料、作り方を取得
+      //入力されたカテゴリ、材料、作り方を取得
       $(document).ready(function() {
         //カテゴリ　ドロップダウンリスト
         var $ddl_categy;
@@ -1046,7 +1155,6 @@ die();
           width: 'auto',
           initialValueSet: true,
           onChange: function(value) {
-            console.log('ddl_categy: ' + value);
             $ddl_categy = value;
             //btnTitle 活性・非活性
             if(value===0) {
@@ -1058,42 +1166,156 @@ die();
           }
         }
                                         );
-        //材料　ドロップダウンリスト
-        $('#ddl_matelials').hierarchySelect({
-          hierarchy: false,
-          search: false,
-          width: 200,
-          initialValueSet: true,
-          onChange: function (value) {
-            console.log('ddl_matelials: "' + value + '"');
-            $ddl_matelials = value;
+        var tr = $("#table tr");
+        for (var i = 0; i < tr.length-1; i++) {
+          if($('#unit_id' + i).val() !== '6' && $('#unit_id' + i).val() !== '7'){
+            $('#spoonGroup' + i).hide();
+          }
+          else{
+            $('#spoonGroup' + i).show();
           }
         }
-                                           );
+        var $selected_ddl_matelials;
+        $('.ddl_matelials').on('click', function(){
+          $selected_ddl_matelials =  $(this).attr("id");
+          $selected_ddl_matelials = $selected_ddl_matelials.replace('ddl_matelials', '');
+        }
+                              );
+        var $selected_spoonGroup;
+        $('.spoonGroup').on('click', function(){
+          $selected_spoonGroup =  $(this).attr("id");
+          $selected_spoonGroup = $selected_spoonGroup.replace('spoonGroup', '');
+        }
+                           );
+        for (var i = 0; i < tr.length-1; i++) {
+          //大さじ・小さじ　ラジオボタンが変更されたときに処理
+          $('input[name="spoonGroup' + i + '"]:radio').change(function () {
+            $('#unit_id' + $selected_spoonGroup).val($(this).val());
+          }
+                                                             );
+        }
+        for (var i = 0; i < tr.length-1; i++) {
+          $('#ddl_matelials' + i).hierarchySelect({
+            hierarchy: false,
+            search: true,
+            width: 200,
+            initialValueSet: true,
+            onChange: function (value) {
+              if(value === 0){
+                $('#txtQuantity' + $selected_ddl_matelials).prop('disabled', true);
+              }
+              else{
+                $('#txtQuantity' + $selected_ddl_matelials).prop('disabled', false);
+              }
+              var res = (String(value)).split(",");
+              var data = {
+                data_unit_id: res[1]
+              };
+              $.ajax({
+                type: "post",
+                url: "register.php",
+                data: data,
+                //Ajax通信が成功した場合
+                success: function(data, dataType) {
+                  //PHPから返ってきたデータの表示
+                  //alert(data);
+                  //分量単位の変更
+                  var res = (String(data)).split("<!");
+                  res = (String(res[0])).split(",");
+                  //大さじ・小さじ　ラジオボタン　表示・非表示
+                  $('#unit_id' + $selected_ddl_matelials).val(res[0]);
+                  if(jQuery.trim(res[1]) !== '大さじ' && jQuery.trim(res[1]) !== '小さじ'){
+                    $('#spoonGroup' + $selected_ddl_matelials).hide();
+                    $('#lblQuantity' + $selected_ddl_matelials).text(res[1]);
+                  }
+                  else{
+                    $('#spoonGroup' + $selected_ddl_matelials).show();
+                    $('#lblQuantity' + $selected_ddl_matelials).text('杯');
+                    if(jQuery.trim(res[1]) === '大さじ' || jQuery.trim(res[1]) === '小さじ'){
+                      $('#rbTablespoon' + $selected_ddl_matelials).prop('checked', true);
+                    }
+                  }
+                  $('#txtQuantity' + $selected_ddl_matelials).val('');
+                  if(res[0] === ''){
+                    $('#lblQuantity' + $selected_ddl_matelials).text('');
+                  }
+                  //送信完了後フォームの内容をリセット
+                  if (data == "送信が完了しました") {
+                    //alert(data);
+                  }
+                  else {
+                  }
+                }
+                ,
+                //Ajax通信が失敗した場合のメッセージ
+                error: function() {
+                  alert('送信が失敗しました。');
+                }
+              }
+                    );
+              //btnSteps 活性・非活性
+              var count=0;
+              var materials=[];
+              var tr=$("#table tr");
+              for (var i = 0; i < tr.length-1; i++) {
+                var cells = tr.eq(i+1).children();
+                for (var j = 0; j < 2; j++) {
+                  if (typeof materials[i]=="undefined")
+                    materials[i]=[];
+                  if(j===0){
+                    if(cells.eq(j).find('.d-none').val() === '0'){
+                      materials[i][j]='';
+                    }
+                    else{
+                      materials[i][j]=cells.eq(j).find('.d-none').val();
+                    }
+                  }
+                  else{
+                    materials[i][j]=cells.eq(j).find('.txtQuantity').val();
+                  }
+                  if (materials[i][j]==='') {
+                    count++;
+                  }
+                }
+              }
+              if (count > 0 || $('#txtPersons').val()==="") {
+                $('#btnSteps').prop('disabled', true);
+              }
+              else {
+                $('#btnSteps').prop('disabled', false);
+              }
+            }
+          }
+                                                 );
+        }
         //登録　更新ボタン押下時
         $('.registration').click(function() {
           //更新処理の場合　recipe_idを取得
-          var recipe_id = document.getElementById('recipe_id').value;
+          var recipe_id = $('#recipe_id').val();
           if (recipe_id === "" || recipe_id === null || recipe_id === undefined) {
             recipe_id = 0;
           }
           //modal_material
           var materials = [];
           var tr = $("#table tr");
-          for (var i = 0, l = tr.length; i < l; i++) {
-            var cells = tr.eq(i).children();
-            for (var j = 0, m = cells.length; j < m; j++) {
+          for (var i = 0; i < tr.length-1; i++) {
+            var cells = tr.eq(i+1).children();
+            for (var j = 0; j < 2; j++) {
               if (typeof materials[i] == "undefined")
                 materials[i] = [];
-              //materials[i][j] = cells.eq(j).text();
-              materials[i][j] = cells.eq(j).find('input').val();
+              if(j===0){
+                materials[i][j] = cells.eq(j).find('.d-none').val();
+              }
+              else{
+                materials[i][j] = cells.eq(j).find('.txtQuantity').val() + ',' + cells.eq(j).find('.unit_id').val();
+              }
             }
           }
           //modal_step
           var steps = [];
           var tr2 = $("#tb_step tr");
-          for (var i = 0, l = tr2.length; i < l; i++) {
-            var cells = tr2.eq(i).children();
+          for (var i = 0; i < tr2.length-1; i++) {
+            var cells = tr2.eq(i+1).children();
             if (typeof steps[i] == "undefined")
               steps[i] = [];
             steps[i][0] = cells.eq(0).find('input').val();
@@ -1101,8 +1323,8 @@ die();
           //modal_access
           var access = [];
           var tr3 = $("#tb_access tr");
-          for (var i = 0, l = tr3.length; i < l; i++) {
-            var cells = tr3.eq(i).children();
+          for (var i = 0; i < tr3.length-1; i++) {
+            var cells = tr3.eq(i+1).children();
             if (typeof access[i] == "undefined")
               access[i] = [];
             if(cells.eq(0).find('input:checked').val() == "on"){
@@ -1116,12 +1338,11 @@ die();
           }
           //postメソッドで送るデータを定義 var data = {パラメータ名 : 値};
           var data = {
+            data_recipe_id: recipe_id,
+            data_ddl_categy: $ddl_categy,
             data_materials: materials,
             data_steps: steps,
-            data_ddl_categy: $ddl_categy,
-            data_recipe_id: recipe_id,
             data_access: access,
-            //data_ddl_matelials: $ddl_matelials
           };
           $.ajax({
             type: "post",
@@ -1141,7 +1362,7 @@ die();
             ,
             //Ajax通信が失敗した場合のメッセージ
             error: function() {
-              //alert('送信が失敗しました。');
+              alert('送信が失敗しました。');
             }
           }
                 );
