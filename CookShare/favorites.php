@@ -17,7 +17,7 @@ $stmt_users = $dbh->prepare('SELECT * FROM users WHERE id = ?');
 $stmt_users->execute([h($_SESSION['ID'])]);
 $result_users = $stmt_users->fetch();
 //お気に入りレシピ全件検索
-$stmt_main = $dbh->prepare('SELECT recipes.id, recipes.title, recipes.image_url, recipes.user_id, recipes.comment, users.name, users.image_path, IfNull(A.user_id, 0) AS favorites_flg, IfNull(B.user_id, 0) AS list_flg, IfNull(C.favorites_count, 0) AS favorites_count, IfNull(D.user_id, 0) AS access_flg, ( SELECT CASE WHEN TIMESTAMPDIFF(DAY, recipes.updated_at, CURRENT_TIMESTAMP()) < 1 THEN( CASE WHEN TIMESTAMPDIFF(HOUR, recipes.updated_at, CURRENT_TIMESTAMP()) < 1 THEN CONCAT(TIMESTAMPDIFF(MINUTE,(recipes.updated_at), CURRENT_TIMESTAMP()), "分前") ELSE CONCAT(TIMESTAMPDIFF(HOUR, recipes.updated_at, CURRENT_TIMESTAMP()), "時間前") END ) ELSE CONCAT(TIMESTAMPDIFF(DAY, recipes.updated_at, CURRENT_TIMESTAMP()), "日前") END ) AS update_time FROM recipes JOIN users ON  recipes.user_id = users.id JOIN favorites ON recipes.id = favorites.recipe_id LEFT OUTER JOIN ( SELECT recipes.id, favorites.user_id FROM recipes LEFT OUTER JOIN favorites ON  recipes.id = favorites.recipe_id WHERE favorites.user_id = :user_id ) A ON  recipes.id = A.id LEFT OUTER JOIN ( SELECT recipes.id, list.user_id FROM recipes LEFT OUTER JOIN list ON  recipes.id = list.recipe_id WHERE list.user_id = :user_id GROUP BY list.recipe_id, list.user_id ) B ON  recipes.id = B.id LEFT OUTER JOIN ( SELECT recipe_id, COUNT(recipe_id) AS favorites_count FROM favorites GROUP BY recipe_id ) C ON  recipes.id = C.recipe_id LEFT OUTER JOIN ( SELECT recipe_id, user_id FROM access WHERE access.user_id = :user_id ) D ON  recipes.id = D.recipe_id WHERE recipes.delete_flg = 0 AND (IfNull(D.user_id, 0) <> 0 OR recipes.user_id = :user_id) AND favorites.user_id = :user_id ORDER BY recipes.id DESC');
+$stmt_main = $dbh->prepare('SELECT recipes.id, recipes.title, recipes.image_url, recipes.user_id, recipes.comment, users.name, users.image_path, IfNull(A.user_id, 0) AS favorites_flg, IfNull(B.user_id, 0) AS list_flg, IfNull(C.favorites_count, 0) AS favorites_count, IfNull(D.user_id, 0) AS access_flg, ( SELECT CASE WHEN TIMESTAMPDIFF(DAY, recipes.updated_at, CURRENT_TIMESTAMP()) < 1 THEN( CASE WHEN TIMESTAMPDIFF(HOUR, recipes.updated_at, CURRENT_TIMESTAMP()) < 1 THEN CONCAT(TIMESTAMPDIFF(MINUTE,(recipes.updated_at), CURRENT_TIMESTAMP()), "分前") ELSE CONCAT(TIMESTAMPDIFF(HOUR, recipes.updated_at, CURRENT_TIMESTAMP()), "時間前") END ) ELSE CONCAT(TIMESTAMPDIFF(DAY, recipes.updated_at, CURRENT_TIMESTAMP()), "日前") END ) AS update_time, recipes.number_of_persons FROM recipes JOIN users ON  recipes.user_id = users.id JOIN favorites ON recipes.id = favorites.recipe_id LEFT OUTER JOIN ( SELECT recipes.id, favorites.user_id FROM recipes LEFT OUTER JOIN favorites ON  recipes.id = favorites.recipe_id WHERE favorites.user_id = :user_id ) A ON  recipes.id = A.id LEFT OUTER JOIN ( SELECT recipes.id, list.user_id FROM recipes LEFT OUTER JOIN list ON  recipes.id = list.recipe_id WHERE list.user_id = :user_id GROUP BY list.recipe_id, list.user_id ) B ON  recipes.id = B.id LEFT OUTER JOIN ( SELECT recipe_id, COUNT(recipe_id) AS favorites_count FROM favorites GROUP BY recipe_id ) C ON  recipes.id = C.recipe_id LEFT OUTER JOIN ( SELECT recipe_id, user_id FROM access WHERE access.user_id = :user_id ) D ON  recipes.id = D.recipe_id WHERE recipes.delete_flg = 0 AND (IfNull(D.user_id, 0) <> 0 OR recipes.user_id = :user_id) AND favorites.user_id = :user_id ORDER BY recipes.id DESC');
 $stmt_main->bindParam(':user_id',$id, PDO::PARAM_INT);
 $stmt_main->execute();
 if ($stmt_main->rowCount() > 0) {
@@ -26,7 +26,7 @@ foreach($stmt_main as $row){
 $rows[] = $row;
 }
 }
-foreach($dbh->query('SELECT recipes.id, materials.name, materials.quantity, unit.name AS unit_name FROM recipes JOIN materials ON recipes.id = materials.recipe_id LEFT JOIN unit ON materials.unit_id = unit.id') as $row1) {
+foreach($dbh->query('SELECT recipes.id, foods.name AS materials_name, materials.quantity, unit.id AS unit_id, unit.name AS unit_name FROM materials JOIN recipes ON  materials.recipe_id = recipes.id JOIN foods ON  materials.food_id = foods.id LEFT JOIN unit ON materials.unit_id = unit.id') as $row1) {
 $rows1[] = $row1;
 }
 foreach($dbh->query('SELECT recipes.id, steps.no, steps.content FROM recipes JOIN steps ON recipes.id = steps.recipe_id') as $row2) {
@@ -111,9 +111,10 @@ $alert_flg = 0;
 }
 //買い物リスト作成ボタン押下時
 if(isset($_POST['action']) && $_POST['action'] == 'list') {
-$stmt_list = $dbh->prepare('INSERT INTO list(recipe_id, name, quantity, user_id) SELECT recipe_id, name, quantity, ? FROM materials WHERE materials.recipe_id = ?');
+$stmt_list = $dbh->prepare('INSERT INTO list( food_id, quantity, unit_id, recipe_id, category_id, user_id ) SELECT food_id, quantity, materials.unit_id, recipe_id, foods.category_id, ? FROM materials JOIN foods ON  materials.food_id = foods.id WHERE materials.recipe_id = ?');
 $stmt_list->execute([h($_SESSION['ID']), h($_POST["recipe_id"])]);
 $alert = '買い物リストを作成しました。';
+$_SESSION['FAVORITES'] = $_POST['favorites'];
 header( "Location: list.php" ) ;
 }
 $dbh = null;
@@ -325,14 +326,21 @@ die();
                   </div>
                   <div class="col-md-7 col-example">
                     <ul class="list-group list-group-flush">
-                      <h4 class="h4-responsive">材料
+                      <h4 class="h4-responsive">材料（
+                        <?= $row['number_of_persons'] ?>人分）
                       </h4>
                       <?php foreach($rows1 as $row1): ?>
                       <?php if($row['id'] == $row1['id']): ?>
                       <li class="list-group-item">
-                        <?= $row1['name']?>
+                        <?= $row1['materials_name']?>
+                        <?php if($row1['unit_id'] === '6' || $row1['unit_id'] === '7'): ?>
+                        <?= $row1['unit_name']?>
+                        <?= $row1['quantity']?>
+                        杯
+                        <?php else: ?>
                         <?= $row1['quantity']?>
                         <?= $row1['unit_name']?>
+                        <?php endif; ?>
                       </li>
                       <?php endif; ?>
                       <?php endforeach; ?>
@@ -374,6 +382,7 @@ die();
                 <button class="btn btn-primary waves-effect waves-light" type="submit" name="action" value="list">
                   <i class="fas fa-clipboard-list">
                   </i> 買い物リスト作成
+                  <input type="hidden" name="favorites" value="1">
                 </button>
                 <input type="hidden" name="recipe_id" value="<?= $row['id'] ?>">
                 <input type="hidden" name="favorites_flg" value="<?= $row['favorites_flg'] ?>">
